@@ -1,0 +1,468 @@
+Commit Message,Name,Email,Updated at,Files Changed,Contributor,All Checks Passed
+"Strip memory space from xla layout inside `PjRtLayout`. PJRT tracks memory space as a different field.
+
+Stripping is done by setting the memory space to default memory space
+
+PiperOrigin-RevId: 617656564",Yash Katariya,yashkatariya@google.com,2024-03-20 23:27:45,third_party/xla/xla/pjrt/pjrt_layout.h,yashk2810,False
+"Support Per-channel quantization for DotGeneral
+
+PiperOrigin-RevId: 617644231",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 22:36:48,"third_party/xla/xla/mlir_hlo/mhlo/transforms/mhlo_quant_legalize_to_int/mhlo_quant_legalize_to_int.cc, third_party/xla/xla/mlir_hlo/tests/Dialect/mhlo/mhlo-quant-legalize-to-int.mlir",tensorflower-gardener,False
+"Increase memory for ASAN test.
+
+PiperOrigin-RevId: 617643592",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 22:34:12,tensorflow/core/tfrt/tfrt_session/BUILD,tensorflower-gardener,False
+"Add constants for non-batching cost
+
+PiperOrigin-RevId: 617641979",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 22:28:26,tensorflow/core/common_runtime/cost_constants.h,tensorflower-gardener,False
+"[XLA:GPU] Enable Triton Codegen to emit matmuls with a trivial non-contracting dimension
+
+PiperOrigin-RevId: 617629846",Anlun Xu,anlunx@google.com,2024-03-20 21:42:04,"third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/triton_fusion_analysis_test.cc, third_party/xla/xla/service/gpu/triton_tiling_propagation.cc, third_party/xla/xla/service/gpu/triton_tiling_propagation.h, third_party/xla/xla/service/gpu/triton_tiling_propagation_test.cc",anlunx,False
+"Internal config change
+
+PiperOrigin-RevId: 617625382",Alan Kelly,alankelly@google.com,2024-03-20 21:25:07,"tensorflow/lite/tools/cmake/modules/xnnpack.cmake, tensorflow/workspace2.bzl",alankelly,False
+"Add a knob to HloCSE to only sink scalar instructions.
+
+HloCSE is executed to identifying unroallable loops.
+
+PiperOrigin-RevId: 617623774",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 21:19:18,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/hlo_cse.cc, third_party/xla/xla/service/hlo_cse.h, third_party/xla/xla/service/hlo_cse_test.cc, third_party/xla/xla/service/while_loop_unroller.cc",tensorflower-gardener,False
+"Rollback of #63091: Fix checkfail in tf.raw_ops.Substr.
+
+PiperOrigin-RevId: 617622232",Shan Han,hanshan@google.com,2024-03-20 21:14:00,tensorflow/core/kernels/substr_op.cc,shan3290,False
+"PR #10747: [XLA:CPU][oneDNN][Bugfix] Fix FLOPs count for dot in oneDNN MatMul Rewriter
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10747
+
+This PR fixes a bug in MAC (multiply-accumulate) / FMA(fused-multiply-add)  count in dot operation when B matrix is transposed.
+Copybara import of the project:
+
+--
+d989fdba6beaff1f0deed1fdee80792f7ef03089 by mdfaijul <md.faijul.amin@intel.com>:
+
+Fix MAC(Multiply Accumulate) count
+
+Merging this change closes #10747
+
+PiperOrigin-RevId: 617616266",Faijul Amin,md.faijul.amin@intel.com,2024-03-20 20:52:46,"third_party/xla/xla/service/cpu/onednn_matmul_rewriter.cc, third_party/xla/xla/tests/onednn_matmul_test.cc",mdfaijul,False
+"Fix api generation?
+
+PiperOrigin-RevId: 617613389",Mark Daoust,markdaoust@google.com,2024-03-20 20:42:21,tensorflow/tools/docs/generate2.py,MarkDaoust,False
+"Fix a test that fails when we enable small object optimization in swisstable.
+
+In this case, we don't call hash/eq on the first insertion with SOO so the crash doesn't take place on every insertion anymore.
+
+PiperOrigin-RevId: 617606725",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 20:20:06,third_party/xla/xla/python/weakref_lru_cache_test.py,tensorflower-gardener,False
+"Added clarification profiling pass that uses command buffers.
+
+PiperOrigin-RevId: 617603997",Raman Sarokin,sorokin@google.com,2024-03-20 20:10:02,"tensorflow/lite/delegates/gpu/cl/BUILD, tensorflow/lite/delegates/gpu/cl/inference_context.cc, tensorflow/lite/delegates/gpu/cl/inference_context.h",roserg,False
+"Bugfix, nit: do not use designated initializers for aggregate initialization.
+
+Drive-by: Shard `onednn_softmax_test` test.
+PiperOrigin-RevId: 617597142",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 19:44:49,"third_party/xla/xla/python/ifrt_proxy/client/array.cc, third_party/xla/xla/python/ifrt_proxy/client/array_test.cc, third_party/xla/xla/python/ifrt_proxy/client/executable.cc, third_party/xla/xla/python/ifrt_proxy/client/executable_test.cc, third_party/xla/xla/python/ifrt_proxy/server/ifrt_backend_test.cc, third_party/xla/xla/tests/BUILD",tensorflower-gardener,False
+"Merge pull request #64038 from ROCm:remove_missing_header
+
+PiperOrigin-RevId: 617592159",TensorFlower Gardener,gardener@tensorflow.org,2024-03-20 19:31:07,tensorflow/core/kernels/sparse/mat_mul_op.cc,tensorflower-gardener,False
+"Public API changes for forthcoming PjRt GPU client with remote devices fix
+
+PiperOrigin-RevId: 617585334",Edward Schwartz,schwartzedward@google.com,2024-03-20 19:01:10,"tensorflow/core/protobuf/config.proto, tensorflow/tools/api/golden/v1/tensorflow.-g-p-u-options.pbtxt",SeeForTwo,False
+"#tf-data Re-use `GlobalShuffleIterator` for the Range dataset.
+
+Also fix an issue with global shuffling when not dropping remainders:
+
+The original range_op implementation did not check out-of-range errors
+after getting the shuffled index. If the parent iterator produces an
+out-of-range index, it may return an out-of-range element.
+
+Without fix, shuffling
+```
+range(10).batch(3, drop_remainder=False)
+```
+could return [[3, 4, 5], [9, 10, 11], [0, 1, 2], [6]]
+which should be [[3, 4, 5], [9], [0, 1, 2], [6, 7, 8]]
+
+However, this may be confusing to the users, so we'll not support
+global shuffling with `drop_remainder=False` for now.
+
+PiperOrigin-RevId: 617571841",Yang Chen,yangchen@google.com,2024-03-20 18:15:47,"tensorflow/core/kernels/data/BUILD, tensorflow/core/kernels/data/batch_dataset_op.cc, tensorflow/core/kernels/data/experimental/BUILD, tensorflow/core/kernels/data/experimental/assert_cardinality_dataset_op.cc, tensorflow/core/kernels/data/range_dataset_op.cc, tensorflow/python/data/experimental/kernel_tests/assert_cardinality_test.py, tensorflow/python/data/experimental/ops/global_shuffle_op.py, tensorflow/python/data/kernel_tests/batch_test.py, tensorflow/python/data/kernel_tests/shard_test.py",yangustc07,False
+"Align is_finite op parameters with other ops
+
+This change no longer caches the input and output tensors in the IsFiniteOp data structure, similar to the unary elementwise ops. This aligns with the guidance in the README.
+
+PiperOrigin-RevId: 617557369",RJ Ascani,rjascani@google.com,2024-03-20 17:30:58,"tensorflow/lite/experimental/shlo/ops/is_finite.cc, tensorflow/lite/experimental/shlo/ops/is_finite.h, tensorflow/lite/experimental/shlo/ops/is_finite_bench.cc, tensorflow/lite/experimental/shlo/ops/is_finite_test.cc",rascani,False
+"Make TaskQueue keep track of the start time of each task
+
+PiperOrigin-RevId: 617550671",Eunjae Kim,eunjaekim@google.com,2024-03-20 17:11:07,"tensorflow/core/kernels/batching_util/batch_scheduler.h, tensorflow/core/kernels/batching_util/batch_scheduler_test.cc, tensorflow/core/kernels/batching_util/shared_batch_scheduler.h",eunjaekim-0,False
+"PR #10636: Offloading 1/3: Add annotation for copy-start/copy-done
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10636
+
+Add stream id in the backend_config of copy-start instruction. The stream id is obtained from hlo_query::NextChannelId().
+The corresponding copy-done instruction which is the use of copy-start instruction will be traversed and added the stream id in the backend_config too. This part is automatically done by the subsequent AnnotateStreamAttributesForUsers() existing in the function.
+The bool data member copy_start_done_ is used to differentiate copy-start/copy-done from other collective instructions and go through two different paths.
+https://github.com/openxla/xla/pull/10450 is split and the current PR is the first 1 out of 3 PRs.
+Copybara import of the project:
+
+--
+ff99c161a634b868d4265204d10d0b80adf2e772 by Jane Liu <janeliu@nvidia.com>:
+
+Add annotation of stream id for copy-start and its use of copy-done instruction
+
+--
+64c746a5de6aa4c9370034ed712192dfd78e3a6e by Jane Liu <janeliu@nvidia.com>:
+
+Enable the annotator for copy-start/copy-done in gpu compiler
+
+--
+7972b987e45cd165834483c4350e953094b5dbe8 by Jane Liu <janeliu@nvidia.com>:
+
+Add the annotator pass after HLO rematerialization pass
+
+--
+2a9e317aac85e4de3f0ff5f1558885408ab4562d by Jane Liu <janeliu@nvidia.com>:
+
+Add the dependency in BUILD
+
+--
+db5ed79f0ec90a1032252beff5108e4f01b61c4a by Jane Liu <janeliu@nvidia.com>:
+
+Use a function to annotate copy-start and add description
+
+--
+b4b3932bfedfabc7f3e22a8766ecbc1fa1188402 by Jane Liu <janeliu@nvidia.com>:
+
+remove the bool var copy_start from the StreamAttributeAnnotator class
+
+--
+11148fe63588f58c85ab2530bda64807bf400476 by Jane Liu <janeliu@nvidia.com>:
+
+Fixes according to the code review
+
+Merging this change closes #10636
+
+PiperOrigin-RevId: 617550093",Jane Liu,janeliu@nvidia.com,2024-03-20 17:09:24,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/service/gpu/stream_attribute_annotator.cc, third_party/xla/xla/service/gpu/stream_attribute_annotator_test.cc",zhenying-liu,False
+"Integrate LLVM at llvm/llvm-project@d93cfd8dab57
+
+Updates LLVM usage to match
+[d93cfd8dab57](https://github.com/llvm/llvm-project/commit/d93cfd8dab57)
+
+PiperOrigin-RevId: 617522339",Benjamin Kramer,kramerb@google.com,2024-03-20 15:32:24,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",d0k,False
+"[xla:gpu] Move the collective-permute-decomposer and Send-Recv pipeliner to
+pre-fusion.
+
+Previously, the Send-Recv pipeliner is invoked as a post-fusion pass. This is a
+problem for two reasons. The loop bound analysis in the pipeliner can't
+recognize loop bound in fusioned computation; performing loop pipelining before
+fusion can enable better fusion decision.
+
+The Send-Recv pipeliner relies on the collective-permute-decomposer to generate
+Send-Recv operations. We now change the collective-permute-decomposer to
+process collective-permute operations instead of collective-permute-operations
+and move this pass along with the Send-Recv pass to pre-fusion.
+
+PiperOrigin-RevId: 617520340",Bixia Zheng,bixia@google.com,2024-03-20 15:24:18,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/collective_permute_decomposer.cc, third_party/xla/xla/service/collective_permute_decomposer.h, third_party/xla/xla/service/collective_permute_decomposer_test.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc",bixia1,False
+"PR #10722: Consolidate Unit Tests for GEMM Rewriter
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10722
+
+Moves the unit tests in `xla/service/gpu/gemm_rewriter_test.cc` into `xla/service/gpu/tests/gemm_rewrite_test.cc`.
+Copybara import of the project:
+
+--
+e3056a172238a256214d856cf3ad5cb44099e06a by Philipp Hack <phack@nvidia.com>:
+
+Merge GEMM rewriter unit tests.
+
+Merging this change closes #10722
+
+PiperOrigin-RevId: 617518997",Philipp Hack,phack@nvidia.com,2024-03-20 15:18:44,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemm_rewriter_test.cc, third_party/xla/xla/service/gpu/tests/gemm_rewrite_test.cc",philipphack,False
+"Cleaning, common stuff moved to separate function.
+
+PiperOrigin-RevId: 617507848",Raman Sarokin,sorokin@google.com,2024-03-20 14:33:38,"tensorflow/lite/delegates/gpu/cl/inference_context.cc, tensorflow/lite/delegates/gpu/cl/inference_context.h",roserg,False
+"PR #10489: [GPU] Fix command buffer support for cuDNN fusions.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10489
+
+CuDnnCmd is constructed before DnnGraph in CuDnnThunk is initialized so CuDnnCmd has to get  unique_ptr\<DnnGraph\>& instead of DnnGraph& at initialization.
+
+Accordingly cuDNN thunks have to be initialized before command buffer ones to initialize graphs before they get captured.
+
+Test CommandBuffersAreSupported used to not demonstrate the use of command buffers because the corresponding command buffer call used to be inlined and no command buffers were created. This is now cleaned up and does work as expected with minimal CUDA graph size set to 1 with a flag.
+Copybara import of the project:
+
+--
+8547c674f3e0858efca9763bed586f1d796184d7 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU] Fix command buffer support for cuDNN fusions.
+
+Merging this change closes #10489
+
+PiperOrigin-RevId: 617505164",Ilia Sergachev,isergachev@nvidia.com,2024-03-20 14:23:28,"third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/cudnn_test.cc, third_party/xla/xla/service/gpu/runtime/BUILD, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.cc, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.h, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd_emitter.cc, third_party/xla/xla/service/gpu/runtime/cudnn_thunk.cc, third_party/xla/xla/service/gpu/runtime/cudnn_thunk.h, third_party/xla/xla/stream_executor/dnn.h",sergachev,False
+"PR #10510: [ROCm] Triton in XLA for ROCm - gemm rewriter triton related changes.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10510
+
+First commit of the series for enabling Triton in XLA for ROCm .
+Copybara import of the project:
+
+--
+832d7253db1f8972862252f034b216d1eed1da29 by Zoran Jovanovic <zjovanov@amd.com>:
+
+[ROCm] Triton in XLA for ROCm - gemm rewriter triton related changes.
+
+Merging this change closes #10510
+
+PiperOrigin-RevId: 617500238",zoranjovanovic-ns,126815388+zoranjovanovic-ns@users.noreply.github.com,2024-03-20 14:00:43,"third_party/xla/xla/service/gpu/gemm_fusion.cc, third_party/xla/xla/service/gpu/triton_tiling_propagation.cc",zoranjovanovic-ns,False
+"Mutex protect XNNPack's workspace.
+
+PiperOrigin-RevId: 617497120",Alan Kelly,alankelly@google.com,2024-03-20 13:46:15,tensorflow/lite/delegates/xnnpack/xnnpack_delegate.cc,alankelly,False
+"[IndexAnalysis] Add indexing map for DynamicUpdateSlice.
+
+PiperOrigin-RevId: 617496344",Sergey Kozub,sergeykozub@google.com,2024-03-20 13:42:13,"third_party/xla/xla/service/gpu/model/BUILD, third_party/xla/xla/service/gpu/model/indexing_analysis.cc, third_party/xla/xla/service/gpu/model/indexing_analysis_test.cc, third_party/xla/xla/service/gpu/model/indexing_context.cc, third_party/xla/xla/service/gpu/model/indexing_context.h",sergeykozub,False
+"Expand presets to `QuantizationConfig` to populate `_quantization_method` for each quantizable unit.
+
+PiperOrigin-RevId: 617493646",Dan Suh,dansuh@google.com,2024-03-20 13:30:08,"tensorflow/compiler/mlir/quantization/stablehlo/passes/lift_quantizable_spots_as_functions.cc, tensorflow/compiler/mlir/quantization/stablehlo/passes/testing/passes.h, tensorflow/compiler/mlir/quantization/stablehlo/passes/testing/passes.td, tensorflow/compiler/mlir/quantization/stablehlo/passes/testing/test_lift_quantizable_spots_as_functions_with_quantization_specs.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization.pyi, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization_lib.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization_lib.h, tensorflow/compiler/mlir/quantization/stablehlo/python/quantization.py, tensorflow/compiler/mlir/quantization/stablehlo/tests/passes/lift_quantizable_spots_as_functions_with_quantization_specs.mlir",dansuh17,False
+"[xla:gpu][NFC] Misc fixes to DynamicAddressComputationFusion
+
+PiperOrigin-RevId: 617491428",Son Tuan Vu,vuson@google.com,2024-03-20 13:19:01,third_party/xla/xla/service/gpu/fusions/custom.cc,tyb0807,False
+"Implement deferring `stablehlo.transpose` ops attached to activations of `stablehlo.add`.
+
+PiperOrigin-RevId: 617486376",Dan Suh,dansuh@google.com,2024-03-20 12:55:16,"tensorflow/compiler/mlir/quantization/stablehlo/BUILD, tensorflow/compiler/mlir/quantization/stablehlo/cc/pass_pipeline.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/pass_pipeline.h, tensorflow/compiler/mlir/quantization/stablehlo/passes/defer_activation_transpose.cc, tensorflow/compiler/mlir/quantization/stablehlo/passes/passes.td, tensorflow/compiler/mlir/quantization/stablehlo/tests/passes/defer_activation_transpose.mlir, tensorflow/compiler/mlir/quantization/stablehlo/tests/pipelines/process_nchw_tensor.mlir, tensorflow/compiler/mlir/quantization/stablehlo/tools/stablehlo_quant_opt.cc",dansuh17,False
+"PR #10536: Size 1 Dimensions in Layer Norm Fusion
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10536
+
+Enables the fusion of layer norm patterns with degenerate input dimensions of size 1 and with additional optional type conversions or reshapes adding or removing degenerate dimensions.
+Copybara import of the project:
+
+--
+54e247d2bf7104358549f0fc31019c36cfb5ce9b by Philipp Hack <phack@nvidia.com>:
+
+Layer norm fusion for inputs with degenerate dimensions.
+
+--
+7d766bf95049e0ea7fba30c7b6262dac553c94ed by Philipp Hack <phack@nvidia.com>:
+
+Layer norm fusion for inputs with degenerate dimensions.
+
+--
+14075f1714dcfec83efe13b8903a34caa4b39c01 by Philipp Hack <phack@nvidia.com>:
+
+Layer norm fusion for inputs with degenerate dimensions.
+
+Merging this change closes #10536
+
+PiperOrigin-RevId: 617484341",Philipp Hack,phack@nvidia.com,2024-03-20 12:44:56,"third_party/xla/xla/service/gpu/cudnn_norm_rewriter.cc, third_party/xla/xla/service/gpu/cudnn_norm_rewriter_test.cc",philipphack,False
+"PR #10711: [GPU][NFC] Clarify dependency of cuDNN fusion compilation on stream executor and cuDNN handle.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10711
+
+LocalCuDnnHandle can now be created only via CudnnAccess which ensures that main cuDNN handle is created first.
+
+DnnGraph methods using cuDNN handle now require DnnSupport&.
+Copybara import of the project:
+
+--
+44baf4b48b9cedc762a77d3087db0581581a03a7 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU][NFC] Clarify dependency of cuDNN fusion compilation on stream executor and cuDNN handle.
+
+Merging this change closes #10711
+
+PiperOrigin-RevId: 617480424",Ilia Sergachev,isergachev@nvidia.com,2024-03-20 12:25:52,"third_party/xla/xla/service/gpu/cudnn_fusion_compiler.cc, third_party/xla/xla/service/gpu/cudnn_fusion_compiler.h, third_party/xla/xla/service/gpu/nvptx_compiler.cc, third_party/xla/xla/stream_executor/cuda/cuda_dnn.cc, third_party/xla/xla/stream_executor/cuda/cuda_dnn.h, third_party/xla/xla/stream_executor/dnn.h",sergachev,False
+"[XLA:GPU] Refactor code that sets priorities into a function.
+
+This change lookups and erases a few more elements from `reverse_map_`, but overall it shouldn't make a dent in the compile time.
+
+With this change, we check if priority is negative before inserting into the queue, not after. This also doesn't affect compile time, but arguably makes the code easier to understand.
+
+PiperOrigin-RevId: 617478676",Oleg Shyshkov,shyshkov@google.com,2024-03-20 12:17:06,third_party/xla/xla/service/gpu/priority_fusion.cc,olegshyshkov,False
+"PR #10626: [XLA:CPU][oneDNN] Add a BF16 pattern for Softmax
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10626
+
+This PR:
+
+1. Adds a pattern for BF16 softmax.
+2. Adds a test to verify rewrite and execution result.
+3. Skips BF16 matmul / softmax tests on machines that do not support BF16
+Copybara import of the project:
+
+--
+f0370a18eed1f2b47d8dc15470b970029726b0e8 by Akhil Goel <akhil.goel@intel.com>:
+
+Add Softmax BF16 pattern and test
+
+--
+62af424e4e74ddb7f64584aa3b05be761db956dc by Akhil Goel <akhil.goel@intel.com>:
+
+Declare convert_instr identifier
+
+--
+d030100ea87923582aa64cdcf0fac1464051288c by Akhil Goel <akhil.goel@intel.com>:
+
+Fix formatting
+
+Merging this change closes #10626
+
+PiperOrigin-RevId: 617477998",akhilgoe,114951738+akhilgoe@users.noreply.github.com,2024-03-20 12:13:23,"third_party/xla/xla/service/cpu/onednn_ops_rewriter.cc, third_party/xla/xla/tests/BUILD, third_party/xla/xla/tests/onednn_matmul_test.cc, third_party/xla/xla/tests/onednn_softmax_test.cc",akhilgoe,False
+"[XLA:GPU][IndexAnalysis] Add indexing map for DynamicSlice.
+
+PiperOrigin-RevId: 617476081",Alexander Belyaev,pifon@google.com,2024-03-20 12:04:33,"third_party/xla/xla/service/gpu/model/indexing_analysis.cc, third_party/xla/xla/service/gpu/model/indexing_analysis_test.cc",pifon2a,False
+"Integrate int8 per-tensor weight-only quantization for server
+
+PiperOrigin-RevId: 617473690",Doyeon Kim,doyeonkim@google.com,2024-03-20 11:53:42,"tensorflow/compiler/mlir/quantization/stablehlo/cc/BUILD, tensorflow/compiler/mlir/quantization/stablehlo/cc/pass_pipeline.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/pass_pipeline.h, tensorflow/compiler/mlir/quantization/stablehlo/cc/weight_only_ptq.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/weight_only_ptq.h, tensorflow/compiler/mlir/quantization/stablehlo/passes/prepare_quantize_hybrid.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/BUILD, tensorflow/compiler/mlir/quantization/stablehlo/python/integration_test/quantize_model_test.py, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization.pyi, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization_lib.cc, tensorflow/compiler/mlir/quantization/stablehlo/python/pywrap_quantization_lib.h, tensorflow/compiler/mlir/quantization/stablehlo/python/quantization.py, tensorflow/compiler/mlir/quantization/stablehlo/quantization_config.proto",doyeonkim0,False
+"Also handle DynamicSlice in MoveCopyToUsers
+
+While there, also fix a bug in the test for Slice.
+The slice operand should have the same layout as the slice.
+
+PiperOrigin-RevId: 617473515",Adrian Kuegel,akuegel@google.com,2024-03-20 11:52:47,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/move_copy_to_users.cc, third_party/xla/xla/service/gpu/move_copy_to_users_test.cc",akuegel,False
+Remove missing `cuda.h` header from `mat_mul_op.cc`,Harsha HS,harsha.havanurshamsundara@amd.com,2024-03-20 12:08:54,tensorflow/core/kernels/sparse/mat_mul_op.cc,hsharsha,True
+"Convert stablehlo.dynamic_slice to tfl.slice
+
+PiperOrigin-RevId: 617473124",Doyeon Kim,doyeonkim@google.com,2024-03-20 11:50:31,"tensorflow/compiler/mlir/lite/stablehlo/tests/uniform-quantized-stablehlo-to-tfl.mlir, tensorflow/compiler/mlir/lite/stablehlo/transforms/uniform_quantized_stablehlo_to_tfl_pass.cc",doyeonkim0,False
+"Add check conditions in `quantization_driver_test.cc`.
+
+- Adds more rigorous checks for desired states in intermediate testing stages.
+- Renames and rewrites `IsEmpty` and `HasQuantParams` for clarity.
+- Follows the recommendations in go/totw/135.
+
+PiperOrigin-RevId: 617469193",Jiyoun (Jen) Ha,jiyounha@google.com,2024-03-20 11:29:41,"tensorflow/compiler/mlir/quantization/common/quantization_lib/BUILD, tensorflow/compiler/mlir/quantization/common/quantization_lib/quantization_driver.h, tensorflow/compiler/mlir/quantization/common/quantization_lib/quantization_driver_test.cc",chococigar,False
+"Sync the declaration and the tests of RegisterFunctionDefForSubgraphs with the definition
+
+This caused a linking error, which blocks many XLA commits
+
+PiperOrigin-RevId: 617466326",Tamás Danyluk,tdanyluk@google.com,2024-03-20 11:14:01,"tensorflow/lite/delegates/flex/delegate_data.h, tensorflow/lite/delegates/flex/delegate_data_test.cc",tdanyluk,False
+"Factor out model import/export functions from SRQ component for reusability
+
+This refactoring is needed in order to reuse model import/export functions for weight-only quantization API.
+
+PiperOrigin-RevId: 617464318",Doyeon Kim,doyeonkim@google.com,2024-03-20 11:04:42,"tensorflow/compiler/mlir/quantization/stablehlo/cc/BUILD, tensorflow/compiler/mlir/quantization/stablehlo/cc/calibration/component.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/saved_model_export.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/saved_model_export.h, tensorflow/compiler/mlir/quantization/stablehlo/cc/saved_model_export_test.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/saved_model_import.cc, tensorflow/compiler/mlir/quantization/stablehlo/cc/saved_model_import.h, tensorflow/compiler/mlir/quantization/stablehlo/cc/static_range_ptq.cc, tensorflow/compiler/mlir/quantization/tensorflow/python/quantize_model.cc",doyeonkim0,False
+"PR #10687: [CPU] Add SimplifyFPConversions only if xla_allow_excess_precision
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10687
+
+Several weeks ago it was a change which enables ""simplify-fp-conversions"" pass in cpu_compiler.cc for intel cpus unconditionally.
+
+[PR-8402](https://github.com/openxla/xla/pull/8402) - [XLA:CPU] [oneDNN] Enable Dot op (MatMul) in BF16 Type
+
+I noticed the following issue with having ""simplify-fp-conversions"" pass in cpu_compiler.cc enabled unconditionally.
+
+My model uses bf16 operators (e.g. convolution). I want to jit compile and run it on CPU preserving intermediate bf16 accuracy.
+
+Cpu compiler uses`float-normalization-bf16` pass which converts bf16 convolution to f32_convolution + convert_to_bf16 + convert_to_f32. (because typical cpu does not support bf16 computation)
+
+Cpu compiler (on XEON) also uses `simplify-fp-conversions` pass which simplifies `f32_convolution + convert_to_bf16 + convert_to_f32` to just `f32_convolution`.
+
+As the result - the whole model was converted to f32 precision internally and conversion to bf16 happens only at the very end.
+
+In some cases we want to execute bf16 model on CPU but get results with accuracy similar to the case when it is executed on bf16 hardware.
+
+To control the accuracy we can use debug_option `xla_allow_excess_precision`
+By default it is true - hence, `simplify-fp-conversions` pass is enabled.
+
+If we need to emulate bf16 computation on intel cpu we can set `XLA_FLAGS=""--xla_allow_excess_precision=false""` - in this case `simplify-fp-conversions` will not be added to cpu_compiler pipeline. f32 ops results will be converted to bf16 immediately. This will preserve bf16 accuracy internally.
+
+[gpu_compiler.cc](https://github.com/openxla/xla/blob/main/xla/service/gpu/gpu_compiler.cc#L1359) already enables `SimplifyFPConversions` pass only if `debug_options.xla_allow_excess_precision()` is true.
+Copybara import of the project:
+
+--
+796dc83ef34455e53b83c02dc68cd6d71306e654 by Alexander Pivovarov <pivovaa@amazon.com>:
+
+[CPU] Add SimplifyFPConversions only if xla_allow_excess_precision
+
+Merging this change closes #10687
+
+PiperOrigin-RevId: 617460913",Alexander Pivovarov,pivovaa@amazon.com,2024-03-20 10:48:58,third_party/xla/xla/service/cpu/cpu_compiler.cc,apivovarov,False
+"Added command buffer object.
+
+PiperOrigin-RevId: 617458127",Raman Sarokin,sorokin@google.com,2024-03-20 10:34:38,"tensorflow/lite/delegates/gpu/cl/BUILD, tensorflow/lite/delegates/gpu/cl/cl_command_buffer.cc, tensorflow/lite/delegates/gpu/cl/cl_command_buffer.h, tensorflow/lite/delegates/gpu/cl/testing/BUILD, tensorflow/lite/delegates/gpu/cl/testing/performance_profiling.cc",roserg,False
+"Update GraphDef version to 1807.
+
+PiperOrigin-RevId: 617438178",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 09:02:25,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-03-20
+
+PiperOrigin-RevId: 617438130",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 09:02:14,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Merge pull request #63091 from tensorflow:SuryanarayanaY-patch-15
+
+PiperOrigin-RevId: 617434904",TensorFlower Gardener,gardener@tensorflow.org,2024-03-20 08:56:53,tensorflow/core/kernels/substr_op.cc,tensorflower-gardener,False
+"Go: Update generated wrapper functions for TensorFlow ops.
+
+PiperOrigin-RevId: 617412161",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 06:46:15,tensorflow/go/op/wrappers.go,tensorflower-gardener,False
+"Update ops-related pbtxt files.
+
+PiperOrigin-RevId: 617407475",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 06:17:47,tensorflow/core/ops/ops.pbtxt,tensorflower-gardener,False
+"Fix a use after free error in LowerToIfrtRestoreVariable pass
+
+PiperOrigin-RevId: 617399882",Deqiang Chen,deqiangc@google.com,2024-03-20 05:34:49,"tensorflow/compiler/mlir/tfrt/tests/ifrt/lower_to_ifrt_restore_variable.mlir, tensorflow/compiler/mlir/tfrt/transforms/ifrt/lower_to_ifrt_restore_variable.cc",deqiangc,False
+"Update [png_io.h]
+
+fix typo
+information has no plural",RoboSchmied,github@roboschmie.de,2024-03-20 05:45:08,tensorflow/core/lib/png/png_io.h,RoboSchmied,True
+"Created `FinalizeTPUEmbeddingV2` to output `embedding_partitions` and `hbm_buffers_config`, and created V2 Ops for BC XLA Ops which accept `embedding_partitions`, `hbm_buffers_config` and the serialization of `TpuTopologyArgsProto`.
+
+PiperOrigin-RevId: 617397729",Dateng Lin,datenglin@google.com,2024-03-20 05:21:22,"tensorflow/core/api_def/base_api/api_def_ComputeDedupDataSizeV2.pbtxt, tensorflow/core/api_def/base_api/api_def_ComputeDedupDataTupleMaskV2.pbtxt, tensorflow/core/api_def/base_api/api_def_FinalizeTPUEmbeddingV2.pbtxt, tensorflow/core/api_def/base_api/api_def_XlaRecvTPUEmbeddingActivationsV2.pbtxt, tensorflow/core/api_def/base_api/api_def_XlaRecvTPUEmbeddingDeduplicationDataV2.pbtxt, tensorflow/core/api_def/base_api/api_def_XlaSendTPUEmbeddingGradientsV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/ComputeDedupDataSizeV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/ComputeDedupDataTupleMaskV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/FinalizeTPUEmbeddingV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/XlaRecvTPUEmbeddingActivationsV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/XlaRecvTPUEmbeddingDeduplicationDataV2.pbtxt, tensorflow/core/ops/compat/ops_history_v2/XlaSendTPUEmbeddingGradientsV2.pbtxt, tensorflow/core/tpu/kernels/tpu_embedding_ops.cc, tensorflow/core/tpu/ops/tpu_embedding_ops.cc, third_party/xla/xla/stream_executor/tpu/tpu_ops_c_api.h",,False
+"Relax verification of ShardingParam so that a dimension can be sharded over multiple axis.
+
+PiperOrigin-RevId: 617356700",Ionel Gog,icgog@google.com,2024-03-20 01:24:46,"third_party/xla/xla/python/ifrt/ir/sharding_param.cc, third_party/xla/xla/python/ifrt/ir/tests/verify_array.mlir, third_party/xla/xla/python/ifrt/support/sharding_conversions_test.cc",ICGog,False
+"[XLA:Python] Use PyType_FromSpec to build heap types, rather than manually building Python heap types.
+
+Cleanup; no functional changes intended.
+
+PiperOrigin-RevId: 617355142",Peter Hawkins,phawkins@google.com,2024-03-20 01:16:46,"third_party/xla/xla/python/pjit.cc, third_party/xla/xla/python/py_array.cc, third_party/xla/xla/python/py_array.h",hawkinsp,False
+"Add software prefetchers to help reduce cache-misses
+
+PiperOrigin-RevId: 617350951",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-20 00:59:17,"tensorflow/lite/kernels/internal/BUILD, tensorflow/lite/kernels/internal/optimized/sse_tensor_utils.cc, tensorflow/lite/kernels/internal/tensor_utils_test.cc",tensorflower-gardener,False
+"lite: code clean up
+
+PiperOrigin-RevId: 617349472",Zichuan Wei,zichuanwei@google.com,2024-03-20 00:51:32,"tensorflow/compiler/mlir/lite/BUILD, tensorflow/compiler/mlir/lite/stablehlo/BUILD, tensorflow/compiler/mlir/lite/stablehlo/odml_to_stablehlo.cc, tensorflow/compiler/mlir/lite/stablehlo/serializer/BUILD, tensorflow/compiler/mlir/lite/stablehlo/serializer/flatbuffer_export.cc, tensorflow/compiler/mlir/lite/stablehlo/serializer/flatbuffer_export.h, tensorflow/compiler/mlir/lite/stablehlo/serializer/flatbuffer_operator.h, tensorflow/compiler/mlir/lite/stablehlo/serializer/flatbuffer_translator.cc, tensorflow/compiler/mlir/lite/stablehlo/serializer/flatbuffer_translator.h, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tf-fb-tf.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-add.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-broadcast_in_dim.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-clamp.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-compare.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-concat.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-constant.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-conv.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-dot.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-gather.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-max.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-mul.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-pad.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-reshape.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-rsqrt.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-scatter.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl-sub.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/legalize-stablehlo-tfl.mlir, tensorflow/compiler/mlir/lite/stablehlo/transforms/stablehlo_tfl_pass.cc, tensorflow/compiler/mlir/lite/stablehlo/transforms/stablehlo_tfl_pass.h",zichuan-wei,False
+"#tf-data Fix asan failure.
+
+PiperOrigin-RevId: 617333468",Yang Chen,yangchen@google.com,2024-03-19 23:45:24,tensorflow/python/data/kernel_tests/BUILD,yangustc07,False
+"Add tensor shape check for ADD & MUL.
+
+PiperOrigin-RevId: 617313236",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-19 22:29:36,tensorflow/lite/delegates/gpu/common/model_builder.cc,tensorflower-gardener,False
+"Replaces XNN_FLAG_KEEP_DIM --> XNN_FLAG_REDUCE_DIM to maintain existing behaviour
+
+PiperOrigin-RevId: 617307564",Alan Kelly,alankelly@google.com,2024-03-19 22:09:17,tensorflow/lite/delegates/xnnpack/xnnpack_delegate.cc,alankelly,False
+"Increase Code Coverage of //third_party/tensorflow/core/tfrt/run_handler_thread_pool/
+
+PiperOrigin-RevId: 617305617",Sania Nagpal,sanianagpal@google.com,2024-03-19 22:02:49,"tensorflow/core/tfrt/run_handler_thread_pool/BUILD, tensorflow/core/tfrt/run_handler_thread_pool/run_handler_concurrent_work_queue_test.cc, tensorflow/core/tfrt/run_handler_thread_pool/run_handler_test.cc",sanianagpal,False
+"Rename GetFusionComputations within instruction fusion.
+
+The GetFusionComputations method returns computations that are candidates for performing fusion. These candidate computations are just non-fusion computations. As we are essentially just returning non-fusion computations, we can rename this function to GetNonFusionComputations.
+
+PiperOrigin-RevId: 617305149",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-19 22:01:16,"third_party/xla/xla/service/gpu/priority_fusion.cc, third_party/xla/xla/service/instruction_fusion.cc, third_party/xla/xla/service/instruction_fusion.h",tensorflower-gardener,False
+"[xla:gpu] Emission of DynamicAddressComputationFusion
+
+PiperOrigin-RevId: 617304920",Son Tuan Vu,vuson@google.com,2024-03-19 22:00:29,"third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/address_computation_fusion_test.cc, third_party/xla/xla/service/gpu/fusions/custom.cc, third_party/xla/xla/service/gpu/fusions/custom.h, third_party/xla/xla/service/gpu/fusions/fusions.cc",tyb0807,False
+"Provide an experimental flag to try converting composite ops directly to tflite ops.
+
+The implementation of the feature to follow.
+
+PiperOrigin-RevId: 617303694",Majid Dadashi,majiddadashi@google.com,2024-03-19 21:56:24,"tensorflow/compiler/mlir/lite/BUILD, tensorflow/compiler/mlir/lite/common/tfl_pass_config.h, tensorflow/compiler/mlir/lite/python/saved_model_to_tfl_flatbuffer.cc, tensorflow/compiler/mlir/lite/tf_tfl_passes.cc, tensorflow/lite/python/convert.py, tensorflow/lite/python/lite.py, tensorflow/lite/toco/toco_flags.proto",majiddadashi,False
+"All subgraphs share a mutex. Subgraphs and Delegates are not thread safe.
+
+PiperOrigin-RevId: 617294455",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-19 21:25:13,"tensorflow/lite/delegates/flex/delegate_data.cc, tensorflow/lite/delegates/flex/delegate_data.h, tensorflow/lite/delegates/flex/subgraph_resource.h",tensorflower-gardener,False
+"Update keras-nightly version in TensorFlow requirements.
+
+PiperOrigin-RevId: 617290482",Ramesh Sampath,rameshsampath@google.com,2024-03-19 21:11:57,tensorflow/tools/pip_package/setup.py,sampathweb,False
+"Add a knob to WhileLoopConstantSinking to only sink scalar constants.
+We use this to prepare the module for urolling while loops.
+
+PiperOrigin-RevId: 617289800",A. Unique TensorFlower,gardener@tensorflow.org,2024-03-19 21:09:57,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/while_loop_constant_sinking.cc, third_party/xla/xla/service/while_loop_constant_sinking.h, third_party/xla/xla/service/while_loop_constant_sinking_test.cc, third_party/xla/xla/service/while_loop_unroller.cc",tensorflower-gardener,False
+"lite: enable VHLO serialization for TFLite path
+
+PiperOrigin-RevId: 617282108",Zichuan Wei,zichuanwei@google.com,2024-03-19 20:46:43,"tensorflow/compiler/mlir/lite/flatbuffer_export.cc, tensorflow/compiler/mlir/lite/tf_to_tfl_flatbuffer.cc",zichuan-wei,False
+"PR #10684: [GPU] Support more elementwise operations and boolean data type in cuDNN GEMM fusions.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/10684
+
+Copybara import of the project:
+
+--
+210f8aaae3206264379c9f1ff5f70f24ffca4a14 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU] Support more elementwise operations and data types in cuDNN GEMM fusions.
+
+Merging this change closes #10684
+
+PiperOrigin-RevId: 617281947",Ilia Sergachev,isergachev@nvidia.com,2024-03-19 20:46:09,"third_party/xla/xla/service/gpu/cudnn_fusion_compiler.cc, third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/cudnn_test.cc",sergachev,False

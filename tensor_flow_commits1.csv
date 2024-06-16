@@ -1,0 +1,1653 @@
+Commit Message,Name,Email,Updated at,Files Changed,Contributor,All Checks Passed
+"[xla:cpu] Emit partitioned loops if operation marked for parallel execution
+
++ temporary rolled back thread pool support in HostKernel as I'll be reworking it to support thunks
+
+PiperOrigin-RevId: 641724588",Eugene Zhulenev,ezhulenev@google.com,2024-06-09 21:06:11,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/benchmarks/elementwise_benchmark_test.cc, third_party/xla/xla/service/cpu/ir_emitter2.cc, third_party/xla/xla/service/cpu/ir_emitter2.h, third_party/xla/xla/service/cpu/ir_emitter2_test.cc, third_party/xla/xla/service/cpu/shape_partition.cc, third_party/xla/xla/service/cpu/shape_partition.h, third_party/xla/xla/stream_executor/host/host_kernel.cc, third_party/xla/xla/stream_executor/host/host_kernel.h",ezhulenev,False
+"Issue a warning where code relies on a bug where treedef.flatten_up_to(...) was overly permissive for None treedefs.
+
+For example, tree_map(..., None, [2, 3]) previously did not raise an error, but None is a container and only leaves can be considered tree prefixes in this case.
+
+In a future release of JAX, this behavior will become an error.
+
+PiperOrigin-RevId: 641690427",Peter Hawkins,phawkins@google.com,2024-06-09 16:17:42,"third_party/xla/xla/python/BUILD, third_party/xla/xla/python/pytree.cc",hawkinsp,False
+"Update GraphDef version to 1888.
+
+PiperOrigin-RevId: 641641438",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-09 09:02:15,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-09
+
+PiperOrigin-RevId: 641641424",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-09 09:02:10,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 641577962",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-09 00:18:54,"third_party/xla/xla/stream_executor/host/BUILD, third_party/xla/xla/stream_executor/host/host_executor.cc, third_party/xla/xla/stream_executor/host/host_stream_test.cc",tensorflower-gardener,False
+"Add a megachip test to offload TC computation to SparseCore
+
+PiperOrigin-RevId: 641572709",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-08 23:27:04,"third_party/xla/xla/layout_util.cc, third_party/xla/xla/layout_util.h, third_party/xla/xla/layout_util_test.cc",tensorflower-gardener,False
+"[XLA:TPU] Retrieve loop_indices directly from instructions_in_loop_, instructions_in_prev_iteration_, instructions_in_next_iteration_.
+
+PiperOrigin-RevId: 641536310",Subhankar Shah,subhankarshah@google.com,2024-06-08 17:56:47,third_party/xla/xla/service/memory_space_assignment/memory_bound_loop_optimizer.cc,subhankarshah,False
+"compat: Update forward compatibility horizon to 2024-06-08
+
+PiperOrigin-RevId: 641476277",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-08 09:03:30,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Update GraphDef version to 1887.
+
+PiperOrigin-RevId: 641475994",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-08 09:02:11,tensorflow/core/public/version.h,tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 641461853",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-08 07:21:06,tensorflow/compiler/mlir/tensorflow/transforms/shape_inference.cc,tensorflower-gardener,False
+"Reverts changelist 641367445
+
+PiperOrigin-RevId: 641411986",Victor Stone,victorstone@google.com,2024-06-08 01:32:45,"third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/service/host_offload_legalize.cc, third_party/xla/xla/service/host_offload_legalize.h, third_party/xla/xla/service/host_offload_legalize_test.cc, third_party/xla/xla/service/host_offloader.cc, third_party/xla/xla/service/host_offloader_test.cc",SandSnip3r,False
+"fix: make hermetic local wheel installation logic support requirements_lock files from any folder in the repo (used to assume it always must be a root directory)
+
+PiperOrigin-RevId: 641403110",Vadym Matsishevskyi,vam@google.com,2024-06-08 00:34:20,"third_party/py/python_repo.bzl, third_party/xla/third_party/py/python_repo.bzl, third_party/xla/third_party/tsl/third_party/py/python_repo.bzl",vam-google,False
+"Merged commit includes the following changes:
+641391735  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Internal change
+
+641383008  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Make callers depend on discrete cc_library targets rather than a catch-all target.
+
+--
+641380555  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Re-enable BF16 exhaustive tests
+
+    Remove intermediate `cc_library` target so that `exhaustive_unary_test_f32_or_smaller.cc` can take advantage of the `copts` set by `xla_test`.
+
+--
+641379897  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [XLA] Fix contiguous allocations when the position has two separate uses and the second use cannot be placed in the alternate memory.
+
+    Also added a verification to ensure there are no multiple pinned allocations.
+
+--
+641375464  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Add ""Java/Kotlin"" qualifier before ""Interpreter API"" in the API docs.
+
+    The C++ API also uses a type named ""Interpreter"", so ""Interpreter API"" is a bit ambiguous.
+
+--
+641372164  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Integrate LLVM at llvm/llvm-project@6f2c61071c27
+
+    Updates LLVM usage to match
+    [6f2c61071c27](https://github.com/llvm/llvm-project/commit/6f2c61071c27)
+
+--
+641368652  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Automated Code Change
+
+--
+641367445  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [XLA] Stop duplicating broadcasts before host memory offloading.
+
+    `HostOffloader` will do this as needed. As a result, `HostOffloadLegalize` no longer needs to differentiate between pre/post LayoutAssignment.
+
+    This requires a change to `TpuCopyNormalizer` to change copies of `""AllocateBuffer""` to clones of `""AllocateBuffer""`. That is because `""AllocateBuffer""` will create a host tensor and host-to-host copies are not supported.
+
+--
+641350563  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Use read locks for updating resource variables for POD dtypes unless
+    use_locking is set. Previously, the dtype of the first input was
+    checked which was always DT_RESOURCE, so is_non_pod_dtype was always
+    set to True.
+
+--
+641346363  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    PR #13523: [ROCm ] fixed build due to https://github.com/openxla/xla/commit/e2a86549996ae6ac57f6eae31c1ed9aee4975bab
+
+    Imported from GitHub PR https://github.com/openxla/xla/pull/13523
+
+    this fixed ROCm build due to https://github.com/openxla/xla/commit/e2a86549996ae6ac57f6eae31c1ed9aee4975bab#diff-1390f748feeae091b1bf422c47df533aba570c7a50a6f3fafda65a5159908cc3R72-R86
+
+    @ddunl @xla-rotation
+
+    this is already a couple of times, e.g., https://github.com/openxla/xla/pull/13194 , please change related [ir_emitter_triton_rocm.cc](https://github.com/openxla/xla/blob/main/xla/service/gpu/ir_emitter_triton_rocm.cc) next time.
+
+    Thanks in advance!
+    Copybara import of the project:
+
+    --
+    931ddf1d5b87c85c3fe1d825665015882d50ef42 by Chao Chen <cchen104@amd.com>:
+
+    fixed build due to https://github.com/openxla/xla/commit/e2a86549996ae6ac57f6eae31c1ed9aee4975bab#diff-1390f748feeae091b1bf422c47df533aba570c7a50a6f3fafda65a5159908cc3R72-R86
+
+    Merging this change closes #13523
+
+--
+641335258  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [xla:cpu] Always inline thread local computations into host kernel function
+
+--
+641333092  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    In run_hlo_module, don't silently drop inputs from snapshot if --input_format not given.
+
+    Before, if an HLO snapshot was passed, it would use the HLO module from the snapshot but not the inputs, if --input_format was omitted
+
+--
+641325552  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [xla:cpu] Keep frame pointer in host kernel functions
+
+--
+641320178  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Remove some header files from compiler/xla/stream_executor:stream_executor target, and have dependencies use more granular ones.
+
+--
+641314727  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Add `DockerImage` to XLA build script
+
+--
+641306427  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Update GPU compatibility checker for CAST op
+
+--
+641301465  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    PR #13062: FP8 Windowed Einsums
+
+    Imported from GitHub PR https://github.com/openxla/xla/pull/13062
+
+    Extends the windowed einsum handler to support collective FP8 GEMMs by shifting the dequantization of dot operands into the body of the while loops of all-gather and reduce-scatter windowed einsums.
+    Copybara import of the project:
+
+    --
+    3ea415d65e47087bb077fa2b13e34c82a4dae87b by Philipp Hack <phack@nvidia.com>:
+
+    Shifts the the dequantization of FP8 operands into the while body of windowed einsums.
+
+    Merging this change closes #13062
+
+--
+641293418  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Integrate LLVM at llvm/llvm-project@5f1adf0433c6
+
+    Updates LLVM usage to match
+    [5f1adf0433c6](https://github.com/llvm/llvm-project/commit/5f1adf0433c6)
+
+--
+641283551  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Add a test to verify that the header files that we include in
+    the TFLite Maven package are self-contained.
+
+--
+641279601  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Fix places where nnapi_delegate_c_api.h contained C++ code that was not valid C code.
+
+    Add a test to verify that nnapi_delegate_c_api.h is valid C code.
+
+--
+641273700  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [xla] Add TraceMe annotation around slow rendezvous calls
+
+--
+641266529  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Support having ""srcs"" from other packages in tflite_cc_library_with_c_headers_test
+    and in cc_library_with_tflite_with_c_headers_test.
+
+    This avoids a build error when invoking those macros with multiple
+    ""srcs"" with different package names but the same unqualified target
+    name.
+
+--
+641266182  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Temporarily disable xla_gpu_enable_address_computation_fusion by default
+
+    See google/jax#21628 and google/jax#21637.
+
+--
+641264709  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [XLA:GPU] Improve the error message for running Triton with an unsupported CUDA compute capability.
+
+    Make it display the detected compute capability.
+
+--
+641250978  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    [XLA:GPU][NFC] Disable `GpuCompilerTest.GemmFusionIsNoOpWhenGemmFusionAutotunerFallsBackToCublas`.
+
+    It is currently flaky.
+
+--
+641238519  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    Fix cast from float to ints so that the full range is used, but never exceeded.
+
+--
+641238116  by A. Unique TensorFlower<gardener@tensorflow.org>:
+    Automated rollback of changelist 641225077.
+
+641233916  by A. Unique TensorFlower<gardener@tensorflow.org>:
+    Automated rollback of changelist 640989239.
+
+641225077  by A. Unique TensorFlower<gardener@tensorflow.org>:
+
+    test force submit for mace windu, will rollback ASAP
+
+--
+
+PiperOrigin-RevId: 641391735",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 23:37:46,"tensorflow/c/experimental/stream_executor/BUILD, tensorflow/core/common_runtime/executor.cc, tensorflow/core/kernels/resource_variable_ops.cc, tensorflow/core/tpu/kernels/BUILD, tensorflow/core/util/BUILD, tensorflow/core/util/autotune_maps/BUILD, tensorflow/lite/build_def.bzl, tensorflow/lite/core/shims/cc_library_with_tflite.bzl, tensorflow/lite/delegates/gpu/common/model_builder_test.cc, tensorflow/lite/delegates/nnapi/BUILD, tensorflow/lite/delegates/nnapi/nnapi_delegate_c_api.h, tensorflow/lite/g3doc/android/delegates/gpu.md, tensorflow/lite/java/BUILD, tensorflow/lite/kernels/cast.cc, tensorflow/lite/kernels/cast_test.cc, tensorflow/lite/tools/versioning/BUILD, tensorflow/lite/tools/versioning/gpu_compatibility.cc, tensorflow/python/saved_model/builder_impl.py, tensorflow/tools/api/golden/v1/tensorflow.saved_model.-builder.pbtxt, tensorflow/tools/api/golden/v1/tensorflow.saved_model.builder.-saved-model-builder.pbtxt, tensorflow/tools/api/golden/v2/tensorflow.__internal__.saved_model.-saved-model-builder.pbtxt, tensorflow/tools/proto_splitter/BUILD, tensorflow/tools/proto_splitter/split.py, tensorflow/tools/proto_splitter/split_test.py, third_party/llvm/generated.patch, third_party/llvm/workspace.bzl, third_party/xla/build_tools/build.py, third_party/xla/xla/backends/interpreter/BUILD, third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/ffi/BUILD, third_party/xla/xla/pjrt/BUILD, third_party/xla/xla/service/BUILD, third_party/xla/xla/service/cpu/ir_emitter.cc, third_party/xla/xla/service/cpu/ir_emitter.h, third_party/xla/xla/service/cpu/ir_emitter2.cc, third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemm_fusion.cc, third_party/xla/xla/service/gpu/gemm_fusion_test.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/service/gpu/gpu_compiler_test.cc, third_party/xla/xla/service/gpu/gpu_windowed_einsum_handler.cc, third_party/xla/xla/service/gpu/gpu_windowed_einsum_handler_test.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_rocm.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/kernels/BUILD, third_party/xla/xla/service/gpu/runtime/BUILD, third_party/xla/xla/service/gpu/softmax_rewriter_triton.cc, third_party/xla/xla/service/gpu/softmax_rewriter_triton_test.cc, third_party/xla/xla/service/gpu/tests/gpu_triton_custom_call_test.cc, third_party/xla/xla/service/host_offload_legalize.cc, third_party/xla/xla/service/host_offload_legalize.h, third_party/xla/xla/service/host_offload_legalize_test.cc, third_party/xla/xla/service/host_offloader.cc, third_party/xla/xla/service/host_offloader_test.cc, third_party/xla/xla/service/lockable.h, third_party/xla/xla/service/memory_space_assignment/algorithm.cc, third_party/xla/xla/service/memory_space_assignment/allocation.h, third_party/xla/xla/service/memory_space_assignment/memory_space_assignment.cc, third_party/xla/xla/service/memory_space_assignment/memory_space_assignment_test.cc, third_party/xla/xla/service/rendezvous.h, third_party/xla/xla/stream_executor/BUILD, third_party/xla/xla/stream_executor/cuda/BUILD, third_party/xla/xla/stream_executor/gpu/BUILD, third_party/xla/xla/stream_executor/host/BUILD, third_party/xla/xla/stream_executor/tpu/BUILD, third_party/xla/xla/tests/collective_ops_test_e2e.cc, third_party/xla/xla/tests/exhaustive/BUILD, third_party/xla/xla/tests/exhaustive/build_defs.bzl, third_party/xla/xla/tools/BUILD, third_party/xla/xla/tools/run_hlo_module.cc, third_party/xla/xla/tools/run_hlo_module_bin_test.cc",tensorflower-gardener,False
+"[XLA:GPU] Land xla_gpu_enable_all_reduce_splitter by default.
+
+PiperOrigin-RevId: 641224108",Greg Olechwierowicz,olechwierowicz@google.com,2024-06-07 12:52:13,third_party/xla/xla/debug_options_flags.cc,golechwierowicz,False
+"[XLA] Simplify the comparison computations generated by the `CreateScalarXXXXXComputation` functions.
+
+The new logic is simpler, better tested, and produces simpler output:
+
+E.g. before:
+
+```
+compare-greater-than.4 {
+  p.1.lhs.7 = s32[] parameter(2)
+  p.1.rhs.8 = s32[] parameter(3)
+  constant.9 = pred[] constant(true)
+  broadcast.10 = pred[] broadcast(constant.9), dimensions={}
+  p.0.lhs.5 = u8[] parameter(0)
+  p.0.rhs.6 = u8[] parameter(1)
+  compare.11 = pred[] compare(p.0.lhs.5, p.0.rhs.6), direction=GT
+  ROOT select.12 = pred[] select(broadcast.10, compare.11, broadcast.10)
+}
+```
+
+after
+
+```
+compare-greater-than.4 {
+  p.1.lhs.7 = s32[] parameter(2)
+  p.1.rhs.8 = s32[] parameter(3)
+  p.0.lhs.5 = u8[] parameter(0)
+  p.0.rhs.6 = u8[] parameter(1)
+  ROOT compare.9 = pred[] compare(p.0.lhs.5, p.0.rhs.6), direction=GT
+}
+```
+
+PiperOrigin-RevId: 641223488",Dimitar (Mitko) Asenov,dasenov@google.com,2024-06-07 12:49:04,"third_party/xla/xla/client/lib/BUILD, third_party/xla/xla/client/lib/comparators.cc, third_party/xla/xla/client/lib/comparators_test.cc",dimitar-asenov,False
+"[XLA:GPU] Compile kernels for radix sort on pairs with u8 keys.
+
+PiperOrigin-RevId: 641220727",Dimitar (Mitko) Asenov,dasenov@google.com,2024-06-07 12:32:26,"third_party/xla/xla/service/gpu/build_defs.bzl, third_party/xla/xla/service/gpu/cub_sort_kernel.cu.cc, third_party/xla/xla/service/gpu/cub_sort_kernel.h, third_party/xla/xla/service/gpu/runtime/cub_sort_thunk.cc, third_party/xla/xla/service/gpu/tests/gpu_cub_sort_test.cc",dimitar-asenov,False
+"Integrate Triton up to [58f70300](https://github.com/triton-lang/triton/commit/58f70300c8082529b184f898901de085bea8ec67)
+
+PiperOrigin-RevId: 641219709",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 12:28:31,"third_party/triton/llvm_integration/series.bzl, third_party/triton/temporary/series.bzl, third_party/triton/temporary/tc_disabled_kwidth_fix.patch, third_party/triton/workspace.bzl, third_party/triton/xla_extensions/series.bzl, third_party/triton/xla_extensions/sparse_dot.patch, third_party/triton/xla_extensions/sparsity_640084124.patch, third_party/xla/third_party/triton/llvm_integration/series.bzl, third_party/xla/third_party/triton/temporary/series.bzl, third_party/xla/third_party/triton/temporary/tc_disabled_kwidth_fix.patch, third_party/xla/third_party/triton/workspace.bzl, third_party/xla/third_party/triton/xla_extensions/series.bzl, third_party/xla/third_party/triton/xla_extensions/sparse_dot.patch, third_party/xla/third_party/triton/xla_extensions/sparsity_640084124.patch, third_party/xla/xla/service/gpu/ir_emitter_triton_cuda.cc, third_party/xla/xla/service/gpu/tests/sparse_convert_to_llvm_ampere.mlir, third_party/xla/xla/service/gpu/tests/sparse_convert_to_llvm_hopper.mlir, third_party/xla/xla/service/gpu/tests/sparse_ttg_accelerate_matmul.mlir, third_party/xla/xla/service/gpu/tests/sparse_ttg_reduce_data_duplication.mlir",tensorflower-gardener,False
+"Fix rank of composition of empty indexing maps.
+
+Also add an integration test for the input_slices emitter that
+verifies this behavior.
+
+PiperOrigin-RevId: 641218553",Johannes Reifferscheid,jreiffers@google.com,2024-06-07 12:22:28,"third_party/xla/xla/service/gpu/fusions/input_slices_mlir_test.cc, third_party/xla/xla/service/gpu/model/indexing_map.cc, third_party/xla/xla/service/gpu/model/indexing_map.h, third_party/xla/xla/service/gpu/model/indexing_map_test.cc",jreiffers,False
+"Fix float conversions: fp8 and u64.
+
+- fp8 was missing lowerings for cmpf and fptoi
+- u64 was using incorrect upper bounds
+
+This fixes unary_ops_test_gpu.
+
+PiperOrigin-RevId: 641218281",Johannes Reifferscheid,jreiffers@google.com,2024-06-07 12:20:58,"third_party/xla/xla/service/gpu/fusions/mlir/elemental_hlo_to_mlir.cc, third_party/xla/xla/service/gpu/fusions/mlir/elemental_hlo_to_mlir_test.cc, third_party/xla/xla/service/gpu/fusions/mlir/expand_float_ops.cc, third_party/xla/xla/service/gpu/fusions/mlir/passes.td, third_party/xla/xla/service/gpu/fusions/mlir/tests/expand_float_ops.mlir",jreiffers,False
+"[XLA:GPU] Change the error message in Triton compatibility test when not running on NVIDIA GPUs.
+
+The previous error was a bit misleading when a `CudaComputeCapability` could
+not be found.
+
+PiperOrigin-RevId: 641211483",Benjamin Chetioui,bchetioui@google.com,2024-06-07 11:46:23,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemm_fusion.cc, third_party/xla/xla/service/gpu/gemm_fusion_test.cc, third_party/xla/xla/service/gpu/softmax_rewriter_triton.cc, third_party/xla/xla/service/gpu/softmax_rewriter_triton_test.cc",bchetioui,False
+"Don't attempt to vectorize complex loads.
+
+In principle we could do this, but we need some fixes to
+our vector size heuristics first. Right now, we generate
+loops of size 4, which is too much (1024 bytes per warp).
+But I'm not sure it's actually helpful in any case.
+
+This fixes the `error: 'arith.constant' op requires attribute
+'value'` errors.
+
+PiperOrigin-RevId: 641183284",Johannes Reifferscheid,jreiffers@google.com,2024-06-07 09:27:28,"third_party/xla/xla/service/gpu/fusions/mlir/tests/vectorize_loads_stores.mlir, third_party/xla/xla/service/gpu/fusions/mlir/vectorize_loads_stores.cc",jreiffers,False
+"Don't reset the indexing map's rank for known empty maps.
+
+A known empty map with rank 0 is different from a known
+empty map with rank N.
+
+This fixes bitcast_convert_test_gpu and probably some others.
+
+PiperOrigin-RevId: 641177819",Johannes Reifferscheid,jreiffers@google.com,2024-06-07 09:04:24,"third_party/xla/xla/service/gpu/model/indexing_analysis_test.cc, third_party/xla/xla/service/gpu/model/indexing_map.cc, third_party/xla/xla/service/gpu/model/indexing_map.h",jreiffers,False
+"Update GraphDef version to 1886.
+
+PiperOrigin-RevId: 641177612",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 09:03:38,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-07
+
+PiperOrigin-RevId: 641177248",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 09:02:28,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Fix Kokoro job name in build script.
+
+PiperOrigin-RevId: 641175122",Benjamin Chetioui,bchetioui@google.com,2024-06-07 08:52:49,third_party/xla/build_tools/build.py,bchetioui,False
+"Simplify more bitcasts.
+
+See the added test for an explanation of the problem. This fixes gpu_index_test.
+
+PiperOrigin-RevId: 641166230",Johannes Reifferscheid,jreiffers@google.com,2024-06-07 08:15:13,"third_party/xla/xla/service/gpu/model/indexing_map.cc, third_party/xla/xla/service/gpu/model/indexing_map_test.cc",jreiffers,False
+"Automated Code Change
+
+PiperOrigin-RevId: 641138674",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 06:06:40,tensorflow/core/profiler/convert/trace_viewer/trace_events.cc,tensorflower-gardener,False
+"Try ResourceManager if a tensor is not found in IfrtRestoreTensorRegistry
+
+PiperOrigin-RevId: 641130355",Deqiang Chen,deqiangc@google.com,2024-06-07 05:23:30,"tensorflow/core/tfrt/mlrt/kernel/BUILD, tensorflow/core/tfrt/mlrt/kernel/ifrt_ops_kernel.cc, tensorflow/core/tfrt/mlrt/kernel/ifrt_ops_kernel_test.cc",deqiangc,False
+"Automated Code Change
+
+PiperOrigin-RevId: 641124851",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 04:56:04,"tensorflow/core/profiler/convert/trace_viewer/trace_events.h, tensorflow/core/profiler/convert/trace_viewer/trace_events_to_json.h",tensorflower-gardener,False
+"Integrate LLVM at llvm/llvm-project@7476c20c481c
+
+Updates LLVM usage to match
+[7476c20c481c](https://github.com/llvm/llvm-project/commit/7476c20c481c)
+
+PiperOrigin-RevId: 641117348",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 04:13:07,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",tensorflower-gardener,False
+"Reverts ea3660ffe949b306c24e1aedf6fb8ce4e2dc9f8a
+
+PiperOrigin-RevId: 641080278",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-07 00:59:47,"third_party/xla/xla/python/BUILD, third_party/xla/xla/python/profiler.cc, third_party/xla/xla/python/profiler_utils.cc, third_party/xla/xla/python/profiler_utils.h",tensorflower-gardener,False
+"Support conditional() with manual subgroups in spmd_partitioner.
+
+PiperOrigin-RevId: 641063671",Parker Schuh,parkers@google.com,2024-06-06 23:49:21,"third_party/xla/xla/service/spmd/spmd_partitioner.cc, third_party/xla/xla/service/spmd/spmd_partitioner_test.cc",pschuh,False
+"#tf-data Change the `VLOG` to `LOG(WARNING)` when overriding the buffer size of `TFRecordDataset` on GCP and S3 to help debugging.
+
+PiperOrigin-RevId: 641042045",Wilsin Gosti,wilsin@google.com,2024-06-06 22:33:02,tensorflow/core/kernels/data/tf_record_dataset_op.cc,wilsingosti,False
+"[xla:cpu] NFC: Add BlockDim and ThreadDim to emitter kernel info struct
+
+PiperOrigin-RevId: 641038210",Eugene Zhulenev,ezhulenev@google.com,2024-06-06 22:22:07,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/ir_emitter2.cc, third_party/xla/xla/service/cpu/ir_emitter2.h, third_party/xla/xla/service/cpu/thunk_emitter.cc",ezhulenev,False
+"Fix profiler utils blocked queue iterator arrow operator
+
+PiperOrigin-RevId: 641037939",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 22:21:15,"third_party/xla/third_party/tsl/tsl/profiler/utils/lock_free_queue.h, third_party/xla/third_party/tsl/tsl/profiler/utils/lock_free_queue_test.cc",tensorflower-gardener,False
+"[Flex] Only set inter-op parallelism attr for ops that has it.
+
+PiperOrigin-RevId: 641036482",Weiyi Wang,weiyiw@google.com,2024-06-06 22:16:43,tensorflow/lite/delegates/flex/kernel.cc,sirakiin,False
+"Copy export_graphdef into tf2xla v2 api.
+
+PiperOrigin-RevId: 641025882",Arturo Schmidt,arturoschmidt@google.com,2024-06-06 21:42:36,"tensorflow/compiler/mlir/tf2xla/api/v2/BUILD, tensorflow/compiler/mlir/tf2xla/api/v2/tf_executor_to_graph.cc, tensorflow/compiler/mlir/tf2xla/api/v2/tf_executor_to_graph.h",rocketas,False
+"`check=True` by default in `sh` in XLA build script
+
+PiperOrigin-RevId: 641025730",David Dunleavy,ddunleavy@google.com,2024-06-06 21:42:06,third_party/xla/build_tools/build.py,ddunl,False
+"Dynamic update slice op
+
+PiperOrigin-RevId: 641019270",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 21:21:02,"tensorflow/lite/tools/versioning/BUILD, tensorflow/lite/tools/versioning/gpu_compatibility.cc",tensorflower-gardener,False
+"Fix bug in SELECT_V2 parser.
+
+PiperOrigin-RevId: 641016333",Juhyun Lee,impjdi@google.com,2024-06-06 21:11:45,tensorflow/lite/delegates/gpu/common/model_builder.cc,impjdi,False
+"Simplify `PyArray::CopyToDeviceWithSharding` using `Sharding::WithDeviceAssignment()`
+
+`Sharding::WithDeviceAssignment()` makes it unnecessary to do manual type dispatch to rewrite device assignment of a sharding.
+
+PiperOrigin-RevId: 641006579",Junwhan Ahn,junwhan@google.com,2024-06-06 20:40:58,third_party/xla/xla/python/py_array.cc,junwhanahn,False
+"Integrate LLVM at llvm/llvm-project@79393124ff74
+
+Updates LLVM usage to match
+[79393124ff74](https://github.com/llvm/llvm-project/commit/79393124ff74)
+
+PiperOrigin-RevId: 640995571",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 20:07:12,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",tensorflower-gardener,False
+"Added hashing to HloOperandIndex.
+
+PiperOrigin-RevId: 640994085",Ryan M. Lefever,lefever@google.com,2024-06-06 20:02:11,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/hlo_dataflow_analysis.h",sparc1998,False
+"Return struct from IsSupportedF8Pattern in gemm_rewriter.cc
+
+This makes no functional changes.
+
+Now IsSupportedF8Pattern returns a struct instead of returning values through pass-by-reference parameters. IsSupportedF8Pattern is also renamed to MatchFp8Param.
+
+PiperOrigin-RevId: 640993289",Reed Wanderman-Milne,reedwm@google.com,2024-06-06 19:59:43,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemm_rewriter.cc",reedwm,False
+"Fix profile path in build script
+
+PiperOrigin-RevId: 640991125",David Dunleavy,ddunleavy@google.com,2024-06-06 19:52:44,third_party/xla/build_tools/build.py,ddunl,False
+"Allow to pass the riegeli writer options when saving `SavedModel` with the experimental image format enabled.
+
+PiperOrigin-RevId: 640989239",Seunghoon Park,seunghoonpark@google.com,2024-06-06 19:46:12,"tensorflow/python/saved_model/builder_impl.py, tensorflow/tools/api/golden/v1/tensorflow.saved_model.-builder.pbtxt, tensorflow/tools/api/golden/v1/tensorflow.saved_model.builder.-saved-model-builder.pbtxt, tensorflow/tools/api/golden/v2/tensorflow.__internal__.saved_model.-saved-model-builder.pbtxt, tensorflow/tools/proto_splitter/BUILD, tensorflow/tools/proto_splitter/split.py, tensorflow/tools/proto_splitter/split_test.py",pclove1,False
+"Return error when no profiler api is found.
+
+PiperOrigin-RevId: 640984670",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 19:28:55,"third_party/xla/xla/python/BUILD, third_party/xla/xla/python/profiler.cc, third_party/xla/xla/python/profiler_utils.cc, third_party/xla/xla/python/profiler_utils.h",tensorflower-gardener,False
+"[XLA:GPU] Renaming AddressComputationFusionRewriter to DynamicSliceFusionRewriter
+
+""AddressComputation"" is confusing, it simply fuses dynamic slice (and dynamic update slice) into other thunks via buffer assignment tricks
+
+PiperOrigin-RevId: 640983792",Sara Smoot,sarasmoot@google.com,2024-06-06 19:25:32,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/dynamic_slice_fusion_rewriter.cc, third_party/xla/xla/service/gpu/dynamic_slice_fusion_rewriter.h, third_party/xla/xla/service/gpu/dynamic_slice_fusion_rewriter_test.cc, third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/dynamic_slice_fusion_test.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc",sgerrard,False
+"[XLA:GPU][NFC] Remove `analysis_` member from `SymbolicTileAnalysisTest` class.
+
+The state is not particularly necessary and adds indirection to the tests,
+which is not desirable.
+
+PiperOrigin-RevId: 640982313",Benjamin Chetioui,bchetioui@google.com,2024-06-06 19:19:52,third_party/xla/xla/service/gpu/model/symbolic_tile_analysis_test.cc,bchetioui,False
+"[xla:cpu] NFC: Update benchmark dimensions for elementwise kernels
+
+PiperOrigin-RevId: 640982185",Eugene Zhulenev,ezhulenev@google.com,2024-06-06 19:19:21,third_party/xla/xla/service/cpu/benchmarks/elementwise_benchmark_test.cc,ezhulenev,False
+"Add get_resource_handle_data to TF API.
+
+PiperOrigin-RevId: 640980528",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 19:13:43,"tensorflow/python/ops/BUILD, tensorflow/python/ops/handle_data_util.py, tensorflow/tools/api/golden/v2/tensorflow.__internal__.ops.pbtxt",tensorflower-gardener,False
+"Vectorize also if the index computation contains a mod.
+
+`(a mod b) * x` worked, but `(a * x) mod b` didn't.
+
+PiperOrigin-RevId: 640978873",Johannes Reifferscheid,jreiffers@google.com,2024-06-06 19:08:13,"third_party/xla/xla/service/gpu/fusions/mlir/tests/vectorize_loads_stores.mlir, third_party/xla/xla/service/gpu/fusions/mlir/vectorize_loads_stores.cc",jreiffers,False
+"Split error_reporter dependency from tflite compiler sparsity
+
+PiperOrigin-RevId: 640974119",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 18:54:09,"tensorflow/compiler/mlir/lite/python/BUILD, tensorflow/compiler/mlir/lite/python/converter_python_api.cc, tensorflow/compiler/mlir/lite/sparsity/BUILD, tensorflow/compiler/mlir/lite/sparsity/sparsify_model.cc, tensorflow/compiler/mlir/lite/sparsity/sparsify_model.h, tensorflow/compiler/mlir/lite/sparsity/sparsify_model_test.cc, tensorflow/lite/toco/python/toco_python_api.cc",tensorflower-gardener,False
+"Add repo field to `Build` class in preparation for adding TensorFlow builds
+
+PiperOrigin-RevId: 640973926",David Dunleavy,ddunleavy@google.com,2024-06-06 18:53:37,third_party/xla/build_tools/build.py,ddunl,False
+"Support per-axis embedding lookup reference kernel
+
+Reverts 58a97840542bac9be1aeae91d7ee7c12ee321d71
+
+PiperOrigin-RevId: 640972701",Pauline Sho,psho@google.com,2024-06-06 18:50:21,"tensorflow/compiler/mlir/lite/ir/tfl_ops.td, tensorflow/compiler/mlir/lite/tests/ops.mlir, tensorflow/lite/kernels/embedding_lookup.cc, tensorflow/lite/kernels/embedding_lookup_test.cc",paulinesho,False
+"1. Combine sharding candidates from both operands 0 and 1 of a gather ops to obtain better candidates for the latter. This mirrors the handling of gather ops in sharding_propagation.cc. Some changes to sharding_propagation to make a couple functions visible for usage from auto-sharding.
+2. Remove an unnecessary function declaration from auto_sharding.h
+
+PiperOrigin-RevId: 640964781",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 18:28:27,"third_party/xla/xla/hlo/experimental/auto_sharding/auto_sharding.h, third_party/xla/xla/hlo/experimental/auto_sharding/auto_sharding_strategy.cc, third_party/xla/xla/hlo/experimental/auto_sharding/auto_sharding_test.cc, third_party/xla/xla/hlo/utils/hlo_sharding_util.cc, third_party/xla/xla/hlo/utils/hlo_sharding_util.h, third_party/xla/xla/service/sharding_propagation.cc",tensorflower-gardener,False
+"[tflite] Disable the pattern-matching based GELU composite builder
+
+- does not support approximate GELU
+- did not match GELU in some user models
+- creating duplicate symbols for decomposition functions
+
+PiperOrigin-RevId: 640960715",Majid Dadashi,majiddadashi@google.com,2024-06-06 18:17:24,"tensorflow/compiler/mlir/lite/stablehlo/odml_converter/tests/outline_composites.mlir, tensorflow/compiler/mlir/lite/stablehlo/tests/composite-lowering.mlir, tensorflow/compiler/mlir/lite/stablehlo/transforms/composite_lowering_patterns.td, tensorflow/compiler/mlir/lite/tf_tfl_passes.cc",majiddadashi,False
+"Cap utilization at 100% when accurate bandwidth cannot be determined.
+
+PiperOrigin-RevId: 640958465",Clive Verghese,cliveverghese@google.com,2024-06-06 18:10:29,tensorflow/core/profiler/convert/op_profile_builder.cc,cliveverghese,False
+"[stream_executor:host] Add a host kernel function loader
+
+It loads the kernel made of a pointer to function on host machine.
+This is useful for loading kernel compiled together with xla by regular cpp compiler.
+
+PiperOrigin-RevId: 640958251",Vladyslav Tsilytskyi,tsilytskyi@google.com,2024-06-06 18:09:56,"third_party/xla/xla/stream_executor/host/BUILD, third_party/xla/xla/stream_executor/host/host_kernel_test.cc, third_party/xla/xla/stream_executor/host/jit_host_kernel_function.cc, third_party/xla/xla/stream_executor/host/ptr_host_kernel_function.cc, third_party/xla/xla/stream_executor/host/ptr_host_kernel_function.h, third_party/xla/xla/stream_executor/kernel_spec.h",tvladyslav,False
+"Integrate StableHLO at openxla/stablehlo@14e2323f
+
+PiperOrigin-RevId: 640947570",Sandeep Dasgupta,sdasgup@google.com,2024-06-06 17:40:01,"third_party/stablehlo/temporary.patch, third_party/stablehlo/workspace.bzl, third_party/xla/third_party/stablehlo/temporary.patch, third_party/xla/third_party/stablehlo/workspace.bzl",sdasgup3,False
+"Update requirements lock post branch cut
+
+PiperOrigin-RevId: 640937130",Michael Hudgins,michaelhudgins@google.com,2024-06-06 17:09:46,"ci/official/requirements_updater/requirements.in, requirements_lock_3_10.txt, requirements_lock_3_11.txt, requirements_lock_3_12.txt, requirements_lock_3_9.txt",MichaelHudgins,False
+"Add new build script to XLA
+
+PiperOrigin-RevId: 640936706",David Dunleavy,ddunleavy@google.com,2024-06-06 17:08:37,"third_party/xla/.kokoro/linux/build.sh, third_party/xla/build_tools/BUILD, third_party/xla/build_tools/build.py",ddunl,False
+"[PJRT] Revert VHLO changes until after release
+
+PiperOrigin-RevId: 640927274",Kevin Gleason,gleasonk@google.com,2024-06-06 16:38:55,third_party/xla/xla/pjrt/mlir_to_hlo.cc,GleasonK,False
+"[xla:ffi] Give access to device ordinal and device memory allocator to FFI handlers
+
+PiperOrigin-RevId: 640919871",Eugene Zhulenev,ezhulenev@google.com,2024-06-06 16:14:58,"third_party/xla/xla/ffi/ffi.h, third_party/xla/xla/service/gpu/custom_call_test.cc",ezhulenev,False
+"Write data immediately in TFLite XNNPack delegate weight cache.
+
+PiperOrigin-RevId: 640908819",Quentin Khan,qkhan@google.com,2024-06-06 15:35:02,"tensorflow/lite/delegates/xnnpack/weight_cache.cc, tensorflow/lite/delegates/xnnpack/weight_cache.h, tensorflow/lite/delegates/xnnpack/weight_cache_schema.fbs, tensorflow/lite/delegates/xnnpack/weight_cache_schema_generated.h, tensorflow/lite/delegates/xnnpack/weight_cache_test.cc, tensorflow/lite/delegates/xnnpack/xnnpack_delegate.cc, tensorflow/lite/tools/delegates/xnnpack_delegate_provider_test.cc",qukhan,False
+"Run DecomposeResourceOpsPass before SinkVariableAsNamedArrayPass
+
+PiperOrigin-RevId: 640904193",Deqiang Chen,deqiangc@google.com,2024-06-06 15:19:08,"tensorflow/compiler/mlir/tfrt/tests/ifrt/sink_variable_as_named_array.mlir, tensorflow/compiler/mlir/tfrt/tf-tfrt-opt.cc, tensorflow/compiler/mlir/tfrt/transforms/ifrt/tf_ifrt_passes.cc",deqiangc,False
+"Fix i4 transfer_read/transfer_write lowerings.
+
+LLVM and XLA pack i4s in opposite orders, so we have to permute the
+vector elements.
+
+PiperOrigin-RevId: 640876021",Johannes Reifferscheid,jreiffers@google.com,2024-06-06 13:24:35,"third_party/xla/xla/service/gpu/fusions/mlir/lower_tensors.cc, third_party/xla/xla/service/gpu/fusions/mlir/tests/lower_tensors.mlir",jreiffers,False
+"[XLA:GPU] Minor improvements to the CUB sort test.
+- Add a comment
+- Verify that the rewrite is actually happening and CUB sort is indeed used. I got bitten by a passing test with a temporary change that didn't actually use CUB.
+- Make the test size medium. Otherwise it timed out quite a lot for me.
+
+PiperOrigin-RevId: 640875027",Dimitar (Mitko) Asenov,dasenov@google.com,2024-06-06 13:19:41,"third_party/xla/xla/service/gpu/tests/BUILD, third_party/xla/xla/service/gpu/tests/gpu_cub_sort_test.cc",dimitar-asenov,False
+"PR #13258: Give GPU compiler class access to PJRT key-value store.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13258
+
+Copybara import of the project:
+
+--
+735291df0028b9d3a1a73a7db8fe5104910b4ca5 by Ilia Sergachev <isergachev@nvidia.com>:
+
+Give GPU compiler class access to PJRT key-value store.
+
+Merging this change closes #13258
+
+PiperOrigin-RevId: 640871152",Ilia Sergachev,isergachev@nvidia.com,2024-06-06 13:02:40,"tensorflow/core/common_runtime/eager/context_distributed_manager.cc, tensorflow/core/common_runtime/gpu/gpu_device.cc, third_party/xla/xla/client/BUILD, third_party/xla/xla/client/executable_build_options.h, third_party/xla/xla/pjrt/BUILD, third_party/xla/xla/pjrt/gpu/se_gpu_pjrt_client.cc, third_party/xla/xla/pjrt/gpu/se_gpu_pjrt_client.h, third_party/xla/xla/pjrt/pjrt_stream_executor_client.cc, third_party/xla/xla/service/BUILD, third_party/xla/xla/service/compiler.h, third_party/xla/xla/service/local_service.cc, third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.cc, third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.h",sergachev,False
+"Update XNNPack version and add LICENSE to pip_package tool.
+
+PiperOrigin-RevId: 640871142",Quentin Khan,qkhan@google.com,2024-06-06 13:02:38,"tensorflow/lite/tools/cmake/modules/xnnpack.cmake, tensorflow/tools/pip_package/BUILD, tensorflow/workspace2.bzl",qukhan,False
+"PR #13461: typo: fix transpse
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13461
+
+Copybara import of the project:
+
+--
+e7c6c23be44648237a31d17bf2574c4f26510889 by knightXun <1004815462@qq.com>:
+
+typo: fix transpse
+
+Merging this change closes #13461
+
+PiperOrigin-RevId: 640863679",flyingcat,1004815462@qq.com,2024-06-06 12:28:41,third_party/xla/xla/mlir_hlo/mhlo/IR/hlo_ops.cc,knightXun,False
+"PR #13254: [NVIDIA] Support pipelining collectives in backward direction with loop invariant instructions in chain
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13254
+
+In some quantization patterns like:
+```
+                constant
+                      |
+                broadcast
+                  /       \
+                /           \
+           clamp         clamp
+            /                  \
+         dot            all-gather
+```
+The all-gathers cannot be pipelined due to the shared operand broadcast having multiple users and not all users are in all-gather's operand chain. The backward pipelining restricts this situation to avoiding exploding data dependencies across loop iterations.
+An exception can be made if such operand chain only contains loop invariant instructions in this case: broadcast and constant.
+This pr introduces a config to collective pipeliner backward direction to allow loop invariant instructions to be in the operand chain.
+Copybara import of the project:
+
+--
+eeea881d084934214b6e2e34319cb3ff4fed9c1e by TJ <tjx@nvidia.com>:
+
+Support pipelining collectives in backward direction with loop invariant instructions in chain
+
+--
+977e713643ae08337ba61ab15fe7812f95078900 by TJ <tjx@nvidia.com>:
+
+Reduced unit test complexity
+
+Merging this change closes #13254
+
+PiperOrigin-RevId: 640860074",TJ Xu,tjx@nvidia.com,2024-06-06 12:12:13,"third_party/xla/xla/service/collective_pipeliner.cc, third_party/xla/xla/service/collective_pipeliner.h, third_party/xla/xla/service/collective_pipeliner_test.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc",Tixxx,False
+"[xla:cpu] Add reduction benchmark and parametrize benchmarks by dim size
+
+PiperOrigin-RevId: 640851921",Eugene Zhulenev,ezhulenev@google.com,2024-06-06 11:30:27,"third_party/xla/xla/service/cpu/benchmarks/BUILD, third_party/xla/xla/service/cpu/benchmarks/elementwise_benchmark_test.cc, third_party/xla/xla/service/cpu/benchmarks/hlo_benchmark_runner.cc, third_party/xla/xla/service/cpu/benchmarks/hlo_benchmark_runner.h, third_party/xla/xla/service/cpu/benchmarks/reduction_benchmark_test.cc",ezhulenev,False
+"PR #13408: Fix mlir_hlo tests on Windows
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13408
+
+This PR aims to fix the mlir_hlo tests which are designed to test the implementation of the HLO (High-Level Optimizer) for MLIR (Multi-Level Intermediate Representation).
+
+**Error**
+mlir_hlo tests were failing on the Windows platform with an error shown below:
+
+INFO: From Testing //xla/mlir_hlo/tests:Dialect/mhlo/verifier_while_op.mlir.test:
+
+==================== Test output for //xla/mlir_hlo/tests:Dialect/mhlo/verifier_while_op.mlir.test:
+
+lit.py: C:\Users\mraunak\AppData\Local\Temp\Bazel.runfiles_8ccro7s1\runfiles\llvm-project\llvm\utils\lit\lit\llvm\config.py:57: note: using lit tools: C:\Program Files\Git\usr\bin
+
+lit.py: C:\Users\mraunak\AppData\Local\Temp\Bazel.runfiles_8ccro7s1\runfiles\llvm-project\llvm\utils\lit\lit\llvm\subst.py:133: **fatal**: **Did not find FileCheck in external/llvm-project/llvm**
+
+**Solution**
+Tweaked the PATH to correctly find the tools required for executing LIT tests on the Windows platform such as FileCheck.
+Copybara import of the project:
+
+--
+b71b35ffac522acd8989d3ea79e038a4e30b7493 by Raunak <mayank.kumar.raunak@intel.com>:
+
+Fix mlir_hlo tests on Windows
+
+Merging this change closes #13408
+
+PiperOrigin-RevId: 640850217",mraunak,83710963+mraunak@users.noreply.github.com,2024-06-06 11:21:56,third_party/xla/xla/mlir_hlo/tests/lit.cfg.py,mraunak,False
+"Add a readme.md file for mlir_interpreter.
+
+I just coincidentally noticed this is missing.
+
+PiperOrigin-RevId: 640848004",Johannes Reifferscheid,jreiffers@google.com,2024-06-06 11:11:06,third_party/xla/xla/mlir/tools/mlir_interpreter/README.md,jreiffers,False
+"[XLA:GPU] [NFC] Merge flag parsing logic from hlo_runner_flags into hlo_runner_main
+
+Having it in a separate file just makes it non-obvious which flags are used (as
+there's only one user), and complicates error handling. Furthermore, it hides
+the fact that some flags are duplicated.
+
+PiperOrigin-RevId: 640845713",George Karpenkov,cheshire@google.com,2024-06-06 11:01:56,"third_party/xla/xla/tools/multihost_hlo_runner/BUILD, third_party/xla/xla/tools/multihost_hlo_runner/hlo_runner_flags.cc, third_party/xla/xla/tools/multihost_hlo_runner/hlo_runner_flags.h, third_party/xla/xla/tools/multihost_hlo_runner/hlo_runner_main.cc",cheshire,False
+"[XLA:GPU] Change SymbolicTileAnalysis to work with HloFusionAdaptor.
+
+This is needed to be able to build SymbolicTileAnalysis in Cost Model.
+
+PiperOrigin-RevId: 640837279",Oleg Shyshkov,shyshkov@google.com,2024-06-06 10:24:25,"third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/model/BUILD, third_party/xla/xla/service/gpu/model/symbolic_tile_analysis.cc, third_party/xla/xla/service/gpu/model/symbolic_tile_analysis.h, third_party/xla/xla/service/gpu/model/symbolic_tile_analysis_test.cc",olegshyshkov,False
+"Integrate LLVM at llvm/llvm-project@55d2fffdae55
+
+Updates LLVM usage to match
+[55d2fffdae55](https://github.com/llvm/llvm-project/commit/55d2fffdae55)
+
+PiperOrigin-RevId: 640825657",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 09:28:52,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",tensorflower-gardener,False
+"Make fragile autotuner tests work / disable them on Hopper
+
+PiperOrigin-RevId: 640825059",Goran Flegar,gflegar@google.com,2024-06-06 09:26:33,third_party/xla/xla/service/gpu/gemm_fusion_autotuner_test.cc,gflegar,False
+"Fix transfer_read and transfer_write with i1 vectors.
+
+LLVM's vector<i1> is packed, but we need vector<u8> semantics.
+
+PiperOrigin-RevId: 640821356",Johannes Reifferscheid,jreiffers@google.com,2024-06-06 09:11:03,"third_party/xla/xla/service/gpu/fusions/mlir/lower_tensors.cc, third_party/xla/xla/service/gpu/fusions/mlir/tests/lower_tensors.mlir",jreiffers,False
+"Update GraphDef version to 1885.
+
+PiperOrigin-RevId: 640819621",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 09:03:43,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-06
+
+PiperOrigin-RevId: 640819137",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 09:02:18,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Rewrite gpu_index_test to don't be a change detector test.
+
+Also get rid of unnecessary HloModuleConfigs. The method from the base class
+already adds those. Fix one test that had invalid layouts.
+Remove one TENSORFLOW_USE_ROCM guard that most likely isn't doing anything
+(we don't define it in the build target).
+
+PiperOrigin-RevId: 640809746",Adrian Kuegel,akuegel@google.com,2024-06-06 08:24:00,third_party/xla/xla/service/gpu/tests/gpu_index_test.cc,akuegel,False
+"[XLA:GPU] Pass HloInstruction instead of HloComputation to TritonWrapper and TritonIrEmitter.
+
+This is a preparation for future changes to SymbolicTileAnalysis.
+
+I plan to make it possible to build SymbolicTileAnalysis from HloFusionAdaptor, so it can be used in Priority Fusion. By design, HloFusionAdaptor should only consist of fusion computations. This change makes sure that we don't pass HloComputation that is not a fusion.
+
+PiperOrigin-RevId: 640808414",Oleg Shyshkov,shyshkov@google.com,2024-06-06 08:17:59,"third_party/xla/xla/service/gpu/fusions/triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.h, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/triton_support_test.cc",olegshyshkov,False
+"[XLA:GPU] Add flag to selectively enable mlir emitters.
+
+This makes it possible to enable the new mlir emitters in groups. We don't want
+to enable all of them immediately by default.
+
+PiperOrigin-RevId: 640784696",Adrian Kuegel,akuegel@google.com,2024-06-06 06:38:22,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/service/gpu/fusions/fusions.cc, third_party/xla/xla/service/gpu/fusions/mlir_emitter_test_base.cc, third_party/xla/xla/service/gpu/model/gpu_hlo_cost_analysis.cc, third_party/xla/xla/service/gpu/tree_reduction_rewriter.cc, third_party/xla/xla/tests/multioutput_fusion_test.cc, third_party/xla/xla/xla.proto",akuegel,False
+"Merge pull request #67796 from tensorflow:sushreebarsa-patch-1
+
+PiperOrigin-RevId: 640770343",TensorFlower Gardener,gardener@tensorflow.org,2024-06-06 05:36:04,tensorflow/python/ops/array_ops.py,tensorflower-gardener,False
+"Adds compilation job information to CompilationLogEntry.
+
+PiperOrigin-RevId: 640761245",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 04:42:36,third_party/xla/xla/service/metrics.proto,tensorflower-gardener,False
+"[XLA:LAYOUT_ASSIGNMENT] Do not crash on repeated all reduce channel ids with
+different shapes.
+
+PiperOrigin-RevId: 640755194",Blake Hechtman,blakehechtman@google.com,2024-06-06 04:12:16,"third_party/xla/xla/service/layout_assignment.cc, third_party/xla/xla/service/layout_assignment_test.cc",blakehechtman,False
+"Remove support for waiting on multiple streams for `WaitForStreamsThunk` and `BarrierCmd`.
+
+Now that we no longer need to emit barriers for `operation_queue_ids`, we can remove this functionality and simplify much of the code.
+
+PiperOrigin-RevId: 640725550",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 02:01:24,"third_party/xla/xla/service/gpu/ir_emitter_unnested.cc, third_party/xla/xla/service/gpu/runtime/BUILD, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.cc, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.h, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd_emitter.cc, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd_test.cc, third_party/xla/xla/service/gpu/runtime/wait_for_streams_thunk.cc, third_party/xla/xla/service/gpu/runtime/wait_for_streams_thunk.h",tensorflower-gardener,False
+"Use `stablehlo::getMinimumVersion()` for `HloProgram` serialization
+
+Using `stable::getCurrentVersion()` provides ~no compatibility guarantees. We should use the version that guarantees version compatibility due to the IFRT Proxy requirements.
+
+PiperOrigin-RevId: 640721650",Junwhan Ahn,junwhan@google.com,2024-06-06 01:45:35,third_party/xla/xla/python/ifrt/hlo/hlo_program_serdes.cc,junwhanahn,False
+"[xla:cpu] Fix host kernel lookup mutex contention
+
+PiperOrigin-RevId: 640715999",Eugene Zhulenev,ezhulenev@google.com,2024-06-06 01:20:31,"third_party/xla/xla/service/cpu/runtime/kernel_thunk.cc, third_party/xla/xla/service/cpu/runtime/kernel_thunk.h, third_party/xla/xla/service/cpu/runtime/thunk_executor.cc",ezhulenev,False
+"[XLA:MSA] Add a runtime simulator to predict the HLO module execution time for a given memory space assignment.
+
+The runtime simulator takes into account the number of trip counts of outer loops when calculating the execution time of an instruction. This is important for nested loops, where the execution time of an instruction can be significantly affected by the number of times it is executed. Before this update, the existing simulator assumes all nested layers have the same trip count, which is a user-provided configuration (default: 5).
+
+This patch implements a new simulator which uses static analysis to get the trip count for each nested layer, and product them to get the total trip counts.
+
+PiperOrigin-RevId: 640714821",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 01:15:11,"third_party/xla/xla/service/memory_space_assignment/BUILD, third_party/xla/xla/service/memory_space_assignment/cost_analysis.cc, third_party/xla/xla/service/memory_space_assignment/cost_analysis.h, third_party/xla/xla/service/memory_space_assignment/memory_space_assignment.cc, third_party/xla/xla/service/memory_space_assignment/memory_space_assignment.h, third_party/xla/xla/service/memory_space_assignment/simulator.cc, third_party/xla/xla/service/memory_space_assignment/simulator.h, third_party/xla/xla/service/memory_space_assignment/simulator_test.cc",tensorflower-gardener,False
+"Start deprecation of `operation_queue_id`.
+
+PiperOrigin-RevId: 640713229",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 01:08:33,"third_party/xla/xla/service/gpu/ir_emitter_unnested.cc, third_party/xla/xla/service/gpu/ir_emitter_unnested.h",tensorflower-gardener,False
+"Allow S4 and U4 in broadcast.
+
+PiperOrigin-RevId: 640712277",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-06 01:05:00,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/cpu_gpu_shape_verifier.cc, third_party/xla/xla/service/cpu_gpu_shape_verifier_test.cc",tensorflower-gardener,False
+"PR #13392: Remove Redundant Shape Comparison in Norm Rewriter
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13392
+
+Removes a superfluous comparison of the shapes of the input and scale when matching and rewriting layer norm patterns.
+Copybara import of the project:
+
+--
+f126d2a142015f2b36d8845bdfc991d1302aa57c by Philipp Hack <phack@nvidia.com>:
+
+Removes a redundant shape comparison in the norm rewriter.
+
+Merging this change closes #13392
+
+PiperOrigin-RevId: 640700979",Philipp Hack,phack@nvidia.com,2024-06-06 00:20:26,"third_party/xla/xla/service/gpu/cudnn_norm_rewriter.cc, third_party/xla/xla/service/gpu/cudnn_norm_rewriter_test.cc",philipphack,False
+"Use TF2 for sparse_bincount_ops_test
+
+PiperOrigin-RevId: 640696189",Edward Schwartz,schwartzedward@google.com,2024-06-06 00:01:29,"tensorflow/python/ops/BUILD, tensorflow/python/ops/sparse_bincount_ops_test.py",SeeForTwo,False
+"Fix a failure of hash function with Numpy2.0.
+
+PiperOrigin-RevId: 640691946",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 23:46:33,"tensorflow/lite/python/BUILD, tensorflow/lite/python/util.py, tensorflow/lite/schema/conversion_metadata.fbs",tensorflower-gardener,False
+"#tf-data Limit the random access compatibility of `flat_map` to those where its input cardinality is small to prevent excessive run time.
+
+PiperOrigin-RevId: 640691920",Wilsin Gosti,wilsin@google.com,2024-06-05 23:46:24,"tensorflow/core/kernels/data/BUILD, tensorflow/core/kernels/data/flat_map_dataset_op.cc, tensorflow/python/data/kernel_tests/flat_map_test.py",wilsingosti,False
+"Correctly propagate deserialization errors from `HloProgramSerDes`
+
+`mlir::stablehlo::deserializePortableArtifact` returns nullptr if parsing fails, which we need to handle explicitly. Also, `ScopedDiagnosticHandler` is used to propagate error messages from MLIR to the caller.
+
+PiperOrigin-RevId: 640682169",Junwhan Ahn,junwhan@google.com,2024-06-05 23:11:48,"third_party/xla/xla/pjrt/BUILD, third_party/xla/xla/pjrt/mlir_to_hlo.cc, third_party/xla/xla/python/ifrt/hlo/BUILD, third_party/xla/xla/python/ifrt/hlo/hlo_program_serdes.cc, third_party/xla/xla/python/ifrt/hlo/hlo_program_serdes_test.cc",junwhanahn,False
+"[xla:ffi] Add ScratchAllocator to external FFI API
+
+PiperOrigin-RevId: 640671530",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 22:35:14,"third_party/xla/xla/ffi/BUILD, third_party/xla/xla/ffi/api/BUILD, third_party/xla/xla/ffi/api/c_api.h, third_party/xla/xla/ffi/api/ffi.h, third_party/xla/xla/ffi/api/ffi_test.cc, third_party/xla/xla/ffi/ffi_api.cc",ezhulenev,False
+"Integrate LLVM at llvm/llvm-project@e282118f4715
+
+Updates LLVM usage to match
+[e282118f4715](https://github.com/llvm/llvm-project/commit/e282118f4715)
+
+PiperOrigin-RevId: 640668093",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 22:24:57,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",tensorflower-gardener,False
+"[xla:cpu] Use Eigen thread pool to execute ThunkExecutor tasks
+
+There few mutex contention points that do not allow to get expected performance improvement. After they are removed this should  be a nearly linear (number pf threads) speedup vs the baseline.
+
+PiperOrigin-RevId: 640667710",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 22:23:52,"third_party/xla/xla/pjrt/cpu/BUILD, third_party/xla/xla/pjrt/cpu/cpu_client.cc, third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/cpu_executable.cc, third_party/xla/xla/service/cpu/cpu_executable.h, third_party/xla/xla/service/cpu/runtime/thunk_executor.cc, third_party/xla/xla/service/cpu/runtime/thunk_executor.h",ezhulenev,False
+"[xla:ffi] Add a test to verify that ffi::ErrorCode and absl::StatusCode have the same integer value
+
+PiperOrigin-RevId: 640666968",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 22:21:19,"third_party/xla/xla/ffi/api/ffi.h, third_party/xla/xla/ffi/api/ffi_test.cc",ezhulenev,False
+"Update master version numbers to 2.18.0.
+
+Branch for TF 2.17 releases has been cut. Switch to new version.
+
+PiperOrigin-RevId: 640639165",Raviteja Gorijala,gorijala@google.com,2024-06-05 20:52:51,"tensorflow/core/public/version.h, tensorflow/tensorflow.bzl, tensorflow/tools/pip_package/setup.py",rtg0795,False
+"Simplify code, and remove unnecessary template usage in dynamic_update_slice to reduce target binary size.
+
+Always convert indice into int64 before processing.
+
+PiperOrigin-RevId: 640609977",Haoliang Zhang,haoliang@google.com,2024-06-05 19:24:19,tensorflow/lite/kernels/dynamic_update_slice.cc,haozha111,False
+"[xla:cpu] Add a very basic DAG executor implementation
+
+PiperOrigin-RevId: 640574779",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 17:42:03,"third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/thunk_executor.cc, third_party/xla/xla/service/cpu/runtime/thunk_executor.h, third_party/xla/xla/service/cpu/runtime/thunk_executor_test.cc",ezhulenev,False
+"[XLA:GPU] Make `cuda_hlo_runner_main` also work for ROCM.
+
+Rename it to `hlo_runner_main_gpu`.
+
+PiperOrigin-RevId: 640570199",Benjamin Chetioui,bchetioui@google.com,2024-06-05 17:29:11,"third_party/xla/xla/service/gpu/build_defs.bzl, third_party/xla/xla/tools/multihost_hlo_runner/BUILD",bchetioui,False
+"[xla:cpu] Add initial implementation of ThunkExecutor
+
+PiperOrigin-RevId: 640540634",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 15:51:04,"third_party/xla/xla/runtime/BUILD, third_party/xla/xla/runtime/buffer_use.cc, third_party/xla/xla/runtime/buffer_use.h, third_party/xla/xla/runtime/buffer_use_test.cc, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/thunk_executor.cc, third_party/xla/xla/service/cpu/runtime/thunk_executor.h, third_party/xla/xla/service/cpu/runtime/thunk_executor_test.cc",ezhulenev,False
+"[xla:cpu] Add BufferUses vector to all XLA:CPU thunks
+
+Track read/write buffer slices for all Thunks to be able to infer correct concurrent schedule from a thunk sequence (coming next).
+
+PiperOrigin-RevId: 640533791",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 15:27:29,"third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/call_thunk.cc, third_party/xla/xla/service/cpu/runtime/call_thunk.h, third_party/xla/xla/service/cpu/runtime/conditional_thunk.cc, third_party/xla/xla/service/cpu/runtime/conditional_thunk.h, third_party/xla/xla/service/cpu/runtime/copy_thunk.h, third_party/xla/xla/service/cpu/runtime/infeed_thunk.cc, third_party/xla/xla/service/cpu/runtime/infeed_thunk.h, third_party/xla/xla/service/cpu/runtime/kernel_thunk.cc, third_party/xla/xla/service/cpu/runtime/kernel_thunk.h, third_party/xla/xla/service/cpu/runtime/kernel_thunk_test.cc, third_party/xla/xla/service/cpu/runtime/outfeed_thunk.cc, third_party/xla/xla/service/cpu/runtime/outfeed_thunk.h, third_party/xla/xla/service/cpu/runtime/rng_state_thunk.h, third_party/xla/xla/service/cpu/runtime/thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.h, third_party/xla/xla/service/cpu/runtime/while_thunk.cc, third_party/xla/xla/service/cpu/runtime/while_thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h",ezhulenev,False
+"Delete XLACompatibleSharding and replace with `jax.sharding.Sharding`.
+
+As of this change, `XLACompatibleSharding` is an alias of `jax.sharding.Sharding` but it will be deprecated in a follow up change.
+
+Why do this?
+
+* All shardings JAX has are XLA Compatible. The reason why `Sharding` was created was to allow non-xla shardings but that's not happened in the past 2 years. So let's simplify!
+
+* Having these 2 types makes things very confusing. One example is:
+  * `jax.jit` only accepts XLACompatibleShardings.
+  * `jax.device_put` accepts `jax.sharding.Sharding` but if you use `device_put` inside `jax.jit` with a memory_kind then you can only pass `XLACompatibleSharding`. This is contradicting and confusing and we can simplify.
+
+PiperOrigin-RevId: 640527070",Yash Katariya,yashkatariya@google.com,2024-06-05 15:02:39,"third_party/xla/xla/python/sharding.cc, third_party/xla/xla/python/sharding.h, third_party/xla/xla/python/xla_client.py, third_party/xla/xla/python/xla_client.pyi, third_party/xla/xla/python/xla_extension/__init__.pyi",yashk2810,False
+"[xla:ffi] Add macro to export XLA:FFI handlers as C function symbols
+
+PiperOrigin-RevId: 640520464",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 14:35:04,"third_party/xla/xla/ffi/BUILD, third_party/xla/xla/ffi/api/api.h, third_party/xla/xla/ffi/ffi_test.cc",ezhulenev,False
+"[xla:gpu] Disable dynamic_slice_fusion_test with tsan
+
+PiperOrigin-RevId: 640516632",Eugene Zhulenev,ezhulenev@google.com,2024-06-05 14:19:15,third_party/xla/xla/service/gpu/tests/BUILD,ezhulenev,False
+"[XLA:GPU] [NFC] Remove dead code
+
+PiperOrigin-RevId: 640510275",George Karpenkov,cheshire@google.com,2024-06-05 13:51:17,third_party/xla/xla/service/gpu/gpu_executable_run_options.h,cheshire,False
+"[NFC] Inline ExecuteXlaRuntimeOrThunks
+
+The method does not make sense since we currently always go through thunks
+
+PiperOrigin-RevId: 640506854",George Karpenkov,cheshire@google.com,2024-06-05 13:35:32,"third_party/xla/xla/service/gpu/gpu_executable.cc, third_party/xla/xla/service/gpu/gpu_executable.h",cheshire,False
+"PR #13241: [GPU] Fail on conflicting autotuning results.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13241
+
+Copybara import of the project:
+
+--
+99192a7119725e1b80153f8b29a229acb191c4f7 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU] Fail on conflicting autotuning results.
+
+Merging this change closes #13241
+
+PiperOrigin-RevId: 640502477",Ilia Sergachev,isergachev@nvidia.com,2024-06-05 13:16:06,"third_party/xla/xla/service/gpu/autotuner_util.cc, third_party/xla/xla/service/gpu/autotuner_util.h, third_party/xla/xla/service/gpu/autotuner_util_test.cc",sergachev,False
+"Improve reduction vectorization.
+
+- v4 loads should not be used with f32 or larger inputs. I measured
+  significant performance degradation from this.
+- stop relying on unrolling for vectorization, so we can
+  remove the MayPreventVectorization heuristic. This enables
+  more vectorization, e.g. of variadic reductions.
+
+PiperOrigin-RevId: 640494326",Johannes Reifferscheid,jreiffers@google.com,2024-06-05 12:41:13,"third_party/xla/xla/service/gpu/fusions/mlir/mlir_fusion_emitter.cc, third_party/xla/xla/service/gpu/fusions/reduction_base.cc, third_party/xla/xla/service/gpu/fusions/reduction_mlir_test.cc",jreiffers,False
+"Fix float to int conversion in mlir emitters.
+
+The float to signed int conversion was there previously, but removed because I
+thought it wasn't needed. Turns out that the float_conversions_test covers this
+logic, and it is indeed needed. Also port the logic for float to unsigned int
+conversion from elemental_ir_emitter and add a test.
+
+PiperOrigin-RevId: 640487704",Adrian Kuegel,akuegel@google.com,2024-06-05 12:10:14,"third_party/xla/xla/service/gpu/fusions/mlir/elemental_hlo_to_mlir.cc, third_party/xla/xla/service/gpu/tests/float_conversions_test.cc",akuegel,False
+"Add a loop optimization pass.
+
+- Basic unroller.
+- Basic pipeliner.
+
+PiperOrigin-RevId: 640479572",Johannes Reifferscheid,jreiffers@google.com,2024-06-05 11:30:33,"third_party/xla/xla/service/gpu/fusions/mlir/BUILD, third_party/xla/xla/service/gpu/fusions/mlir/optimize_loops.cc, third_party/xla/xla/service/gpu/fusions/mlir/passes.h, third_party/xla/xla/service/gpu/fusions/mlir/passes.td, third_party/xla/xla/service/gpu/fusions/mlir/tests/optimize_loops.mlir",jreiffers,False
+"Update GraphDef version to 1884.
+
+PiperOrigin-RevId: 640446356",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 09:02:19,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-05
+
+PiperOrigin-RevId: 640446344",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 09:02:16,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Create a load/store vectorization pass.
+
+This is a very basic pass that works for the vector loops we
+generate. Emitting vector code directly would be nicer, but
+that can't be done reasonably without a progressive lowering.
+
+Once this pass is enabled, we will no longer rely on unrolling
+and LLVM's autovectorization, allowing us to vectorize more
+loads and stores (essentially, we can ditch the
+MayPreventVectorization heuristic).
+
+PiperOrigin-RevId: 640434687",Johannes Reifferscheid,jreiffers@google.com,2024-06-05 08:13:51,"third_party/xla/xla/service/gpu/fusions/mlir/BUILD, third_party/xla/xla/service/gpu/fusions/mlir/passes.h, third_party/xla/xla/service/gpu/fusions/mlir/passes.td, third_party/xla/xla/service/gpu/fusions/mlir/tests/vectorize_loads_stores.mlir, third_party/xla/xla/service/gpu/fusions/mlir/vectorize_loads_stores.cc",jreiffers,False
+"Fix usage of cl_intel_required_subgroup_size for non-intel driver
+
+PiperOrigin-RevId: 640434035",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 08:10:43,tensorflow/lite/delegates/gpu/common/tasks/conv_generic.cc,tensorflower-gardener,False
+"[XLA:GPU][NFC] Do some cleanups in `xla/service/instruction_fusion.cc`.
+
+PiperOrigin-RevId: 640432889",Benjamin Chetioui,bchetioui@google.com,2024-06-05 08:05:48,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/instruction_fusion.cc",bchetioui,False
+"Implement ""bad_indcies_policy"" for ScatterNd.
+
+For testing, we also introduced ""ScatterNdTest"" that verifies the existing ""default"" behavior for comparison.
+
+PiperOrigin-RevId: 640429046",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 07:49:39,"tensorflow/core/kernels/scatter_nd_op.cc, tensorflow/core/kernels/scatter_nd_op_test.cc",tensorflower-gardener,False
+"Integrate LLVM at llvm/llvm-project@392ca64893dc
+
+Updates LLVM usage to match
+[392ca64893dc](https://github.com/llvm/llvm-project/commit/392ca64893dc)
+
+PiperOrigin-RevId: 640426623",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 07:38:51,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl, third_party/xla/xla/tsl/concurrency/async_value_ref.h",tensorflower-gardener,False
+"Raise error for convolutions with unsupported types.
+
+The main motivation is to give a better error when FP8 convolutions are run on unsupported GPUs, but this change also raises an error on convolutions with complex types, which aren't supported on any GPU. Before this change, convolutions with unsupported types would give cryptic errors during autotuning.
+
+Among integer convolutions, only S8 convolutions are supported. The pass CudnnFusedConvRewriter may rewrite convolutions on wider types into S8 convolutions if the inputs are casted from S8. CudnnFusedConvRewriter itself already raises an error if there are convolutions on non-S8 integral types, so there is no need to raise an error explicitly.
+
+PiperOrigin-RevId: 640424678",Reed Wanderman-Milne,reedwm@google.com,2024-06-05 07:30:11,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/amdgpu_compiler.cc, third_party/xla/xla/service/gpu/conv_algorithm_picker_test.cc, third_party/xla/xla/service/gpu/cudnn_fused_conv_rewriter.h, third_party/xla/xla/service/gpu/cudnn_fused_conv_rewriter_test.cc, third_party/xla/xla/service/gpu/gpu_conv_rewriter.cc, third_party/xla/xla/service/gpu/gpu_conv_rewriter.h, third_party/xla/xla/service/gpu/gpu_conv_rewriter_test.cc, third_party/xla/xla/service/gpu/nvptx_compiler.cc",reedwm,False
+"`ScatterNdFunctor` to update operands of all valid indices and continue on bad indices.
+This is to support the new attribute ""bad_indices_policy"". Passing downs the behavior also works, but it makes `ScatterNdFunctor` unnecessarily complicated while the only gain is the performance with out-of-bound error.
+
+For testing, the existing ""Error_OutOfBound"" test is modified so it can also ensure that the bad index in the middle still correctly raise error and the caller still handles it.
+
+PiperOrigin-RevId: 640420624",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 07:13:21,"tensorflow/core/kernels/scatter_nd_op_cpu_impl.h, tensorflow/core/kernels/scatter_nd_op_test.cc",tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640402269",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 05:50:26,"tensorflow/core/tfrt/saved_model/python/BUILD, tensorflow/core/tfrt/saved_model/python/saved_model_load_and_run.cc, tensorflow/core/tfrt/saved_model/python/saved_model_load_and_run.h, tensorflow/core/tfrt/saved_model/python/saved_model_load_and_run_wrapper.cc",tensorflower-gardener,False
+"Add int4 support
+
+PiperOrigin-RevId: 640396904",Deqiang Chen,deqiangc@google.com,2024-06-05 05:22:08,"tensorflow/core/framework/tensor_matcher.cc, tensorflow/core/framework/tensor_matcher_test.cc, tensorflow/core/tfrt/ifrt/BUILD, tensorflow/core/tfrt/ifrt/sharding_utils.cc, tensorflow/core/tfrt/ifrt/sharding_utils.h, tensorflow/core/tfrt/ifrt/sharding_utils_test.cc",deqiangc,False
+"[XLA:GPU] Renaming AddressComputationFusion to DynamicSliceFusion
+
+""AddressComputation"" is confusing, it simply fuses dynamic slice (and dynamic update slice) into other thunks via buffer assignment tricks
+
+PiperOrigin-RevId: 640388097",Sara Smoot,sarasmoot@google.com,2024-06-05 04:33:57,"third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/custom.cc, third_party/xla/xla/service/gpu/fusions/custom.h, third_party/xla/xla/service/gpu/fusions/dynamic_slice_fusion_test.cc, third_party/xla/xla/service/gpu/fusions/fusions.cc",sgerrard,False
+"When serializing a remote tensor handle, stop passing device name explicitly  where it can be inferred
+
+PiperOrigin-RevId: 640367809",Anshuman Goswami,anshumang@google.com,2024-06-05 03:00:26,"tensorflow/core/common_runtime/eager/execute_node.cc, tensorflow/core/distributed_runtime/eager/remote_copy_node.cc, tensorflow/core/distributed_runtime/eager/remote_mgr.cc, tensorflow/core/distributed_runtime/eager/remote_mgr.h, tensorflow/core/distributed_runtime/eager/remote_mgr_test.cc",anshumang,False
+"Add timing information for running models
+
+PiperOrigin-RevId: 640354992",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 01:55:08,tensorflow/lite/delegates/gpu/cl/testing/performance_profiling.cc,tensorflower-gardener,False
+"Support int64 indice type for tflite dynamic update slice op.
+
+PiperOrigin-RevId: 640348606",Haoliang Zhang,haoliang@google.com,2024-06-05 01:23:51,"RELEASE.md, tensorflow/compiler/mlir/lite/ir/tfl_ops.td, tensorflow/compiler/mlir/lite/tests/legalize-tf.mlir, tensorflow/lite/core/kernels/register.cc, tensorflow/lite/kernels/dynamic_update_slice.cc, tensorflow/lite/kernels/dynamic_update_slice_test.cc, tensorflow/lite/tools/versioning/op_version.cc, tensorflow/lite/tools/versioning/op_version_test.cc, tensorflow/lite/tools/versioning/runtime_version.cc",haozha111,False
+"Simplify stream_executor BUILD file by removing no longer necessary rules.
+
+PiperOrigin-RevId: 640346668",Kyle Lucke,klucke@google.com,2024-06-05 01:13:37,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/stream_executor/BUILD",klucke,False
+"Add support for async operations in `CommandBuffers`.
+
+This is now straightforward -- all we need to do is ensure that the `WaitForStreamsThunks` get lowered into appropriate `CommandBufferCmds`. There's already a `BarrierCmd` that *almost* works. I only had to add support for waiting on multiple streams instead of waiting on a single stream.
+
+PiperOrigin-RevId: 640338817",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-05 00:38:41,"third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.cc, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd.h, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd_emitter.cc, third_party/xla/xla/service/gpu/runtime/command_buffer_cmd_test.cc, third_party/xla/xla/service/gpu/tests/BUILD, third_party/xla/xla/service/gpu/tests/async_command_buffer_test.cc",tensorflower-gardener,False
+"Bump xla_version and skip crashing test guarded on xla_version
+
+PiperOrigin-RevId: 640337040",Parker Schuh,parkers@google.com,2024-06-05 00:30:19,"third_party/xla/xla/pjrt/c/pjrt_c_api_helpers.cc, third_party/xla/xla/python/py_client.h",pschuh,False
+"Refactor loop unroller pass.
+Add a knob to force unroll if needed.
+
+PiperOrigin-RevId: 640336974",Farzin Houshmand,farzinh@google.com,2024-06-05 00:30:01,"third_party/xla/xla/service/while_loop_unroller.cc, third_party/xla/xla/service/while_loop_unroller.h",farzinhoushmand,False
+"PR #13391: [NVIDIA] Disable the bias reuse when gemm users > 1
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13391
+
+We encountered a new use case where our reset of the `output to operand aliasing` won't be reached when the gemm users > 1 and that additional user does another amax-like ops.
+
+This PR fix it and the corresponding unit test is included.
+
+cc. @philipphack @reedwm @hx89
+Copybara import of the project:
+
+--
+362671affabad98c9d38d28af48e0127c1ed1586 by kaixih <kaixih@nvidia.com>:
+
+Disable the bias reuse when gemm users > 1
+
+--
+02daf802271927bd48b07a1253779ba451ea8bca by kaixih <kaixih@nvidia.com>:
+
+Rename the test
+
+Merging this change closes #13391
+
+PiperOrigin-RevId: 640331324",Kaixi Hou,kaixih@nvidia.com,2024-06-05 00:07:24,"third_party/xla/xla/service/gpu/gemm_rewriter.cc, third_party/xla/xla/service/gpu/tests/gemm_rewrite_test.cc",kaixih,False
+"Fix AMD CI build break in profiler utils
+
+PiperOrigin-RevId: 640321301",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 23:31:45,third_party/xla/third_party/tsl/tsl/profiler/utils/lock_free_queue.h,tensorflower-gardener,False
+"Include necessary .h files in the aar lib.
+
+PiperOrigin-RevId: 640318226",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 23:20:10,tensorflow/lite/java/BUILD,tensorflower-gardener,False
+"Mark `//build_tools/configure:configure_test` as `notap` with associated comment
+
+PiperOrigin-RevId: 640317959",David Dunleavy,ddunleavy@google.com,2024-06-04 23:19:10,third_party/xla/build_tools/configure/BUILD,ddunl,False
+"Use Layout::SetProto in Shape::SetProto, this call site was missed in an earlier change.
+
+PiperOrigin-RevId: 640315461",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 23:10:35,third_party/xla/xla/shape.cc,tensorflower-gardener,False
+"Insert blurb for new release notes TF 2.18.0.
+
+PiperOrigin-RevId: 640315234",Raviteja Gorijala,gorijala@google.com,2024-06-04 23:09:43,RELEASE.md,rtg0795,False
+"[PJRT] Use SerializeUsingVersionedStablehlo for PJRT API version 41+
+
+PiperOrigin-RevId: 640298727",Kevin Gleason,gleasonk@google.com,2024-06-04 22:16:38,"third_party/stablehlo/temporary.patch, third_party/xla/third_party/stablehlo/temporary.patch, third_party/xla/xla/pjrt/mlir_to_hlo.cc, third_party/xla/xla/pjrt/mlir_to_hlo.h, third_party/xla/xla/pjrt/pjrt_c_api_client.cc",GleasonK,False
+"[xla:runtime] Add BufferUse to track buffer slice read/write conflicts
+
+This already exists in gpu backends here: https://github.com/openxla/xla/blob/e308cd376175de82627d29a959cea5cf458b5ea4/xla/service/gpu/runtime/command_buffer_cmd.h#L80-L97. Moving to shared component in preparation for runtime unification.
+
+PiperOrigin-RevId: 640298121",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 22:14:23,"third_party/xla/xla/runtime/BUILD, third_party/xla/xla/runtime/README.md, third_party/xla/xla/runtime/buffer_use.h, third_party/xla/xla/runtime/buffer_use_test.cc",ezhulenev,False
+"[XLA:GPU] Move SoftMax output tile size calculation to TritonFusion.
+
+We have the same logic that finds reduce in a SoftMax fusion duplicated to calculate tile sizes and launch dimensions. It's better to have everything in TritonFusion, so we can also get tile sizes in Cost Model.
+
+PiperOrigin-RevId: 640293221",Oleg Shyshkov,shyshkov@google.com,2024-06-04 21:58:47,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/triton.cc, third_party/xla/xla/service/gpu/fusions/triton.h, third_party/xla/xla/service/gpu/fusions/triton_test.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/model/gpu_performance_model_base.cc, third_party/xla/xla/service/gpu/triton_support_test.cc",olegshyshkov,False
+"Rewrite colocation_predecessor_trees_pass.
+
+The new implementation propagate the colocation information from the specific pattern which are generated based on ICI weight distribution for TF2/min in MLIR bridge.
+
+PiperOrigin-RevId: 640277559",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 21:08:26,"tensorflow/core/common_runtime/colocate_predecessor_trees_pass.cc, tensorflow/core/common_runtime/colocate_predecessor_trees_pass.h, tensorflow/core/common_runtime/colocate_predecessor_trees_pass_test.cc",tensorflower-gardener,False
+"PR #12975: [XLA:CPU][oneDNN] Fix failures in onednn_matmul_tests
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/12975
+
+This PR fixes failures seen in onednn_matmul_tests
+Copybara import of the project:
+
+--
+6ff6bd59a20fdabaf450134d6b449348a7a3c2ed by Kanvi Khanna <kanvi.khanna@intel.com>:
+
+Fix failures in onednn_matmul_tests
+
+Merging this change closes #12975
+
+PiperOrigin-RevId: 640275530",Kanvi Khanna,kanvi.khanna@intel.com,2024-06-04 21:02:39,"third_party/xla/xla/service/cpu/onednn_matmul_rewriter.cc, third_party/xla/xla/tests/onednn_matmul_test.cc",kanvi-nervana,False
+"Fix call to HloDataflowAnalysis::CanShareOperandBufferWithUser inside of HloOrdering::UsesBeforeValueDefinition.
+
+The current invocation does not consider the case in which the value instruction is an async wrapped call instruction residing in a separate computation.
+
+Added unit test in hlo_ordering_test.
+
+PiperOrigin-RevId: 640265529",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 20:31:16,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/hlo_ordering.cc, third_party/xla/xla/service/hlo_ordering_test.cc",tensorflower-gardener,False
+"[xla] Add debug option flag xla_use_shardonnay.
+
+PiperOrigin-RevId: 640262872",Bixia Zheng,bixia@google.com,2024-06-04 20:23:58,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/xla.proto",bixia1,False
+"[XLA:GPU] Pass CUDA and cuDNN versions (or ROCm counterparts) explicitly into CudnnFusedConvRewriter.
+
+PiperOrigin-RevId: 640256343",Thomas Joerg,tjoerg@google.com,2024-06-04 20:02:57,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/amdgpu_compiler.cc, third_party/xla/xla/service/gpu/cudnn_fused_conv_rewriter.cc, third_party/xla/xla/service/gpu/cudnn_fused_conv_rewriter.h, third_party/xla/xla/service/gpu/cudnn_fused_conv_rewriter_test.cc, third_party/xla/xla/service/gpu/nvptx_compiler.cc",thomasjoerg,False
+"PR #12537: [XLA:CPU][oneDNN][BugFix] Add axis support to oneDNN softmax rewriter
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/12537
+
+This PR fixes :
+XLA Issue : https://github.com/openxla/xla/issues/11772
+corresponding JAX issue : https://github.com/google/jax/issues/20856
+
+Accuracy fix :
+This PR adds support for softmax axis other than -1, previously oneDNN softmax was always executed with axis = -1 (last dimension)
+Accuracy issue is observed from JAX 0.4.22 till last release, with current main branch we don't see accuracy issue as the JAX softmax HLO pattern changed (https://github.com/google/jax/pull/20643) and HLO pattern is not re-written to oneDNN softmax. Hence, this PR also adjusts the oneDNN softmax pattern to recognize new HLO pattern and rewrite into oneDNN softmax custom call.
+Copybara import of the project:
+
+--
+b983bd61044bf52838661057f570e9e218803549 by Sachin Muradi <sachin.muradi@intel.com>:
+
+Add axis support
+
+--
+07f7d14aa1f00676b21e8c1f48719fe7e56bcfd2 by Sachin Muradi <sachin.muradi@intel.com>:
+
+address more comments + optional broadcast
+
+Merging this change closes #12537
+
+PiperOrigin-RevId: 640246750",sachinmuradi,sachin.muradi@intel.com,2024-06-04 19:31:04,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/backend_config.proto, third_party/xla/xla/service/cpu/ir_emitter.cc, third_party/xla/xla/service/cpu/onednn_ops_rewriter.cc, third_party/xla/xla/service/cpu/onednn_pattern_utils.h, third_party/xla/xla/service/cpu/onednn_softmax.cc, third_party/xla/xla/service/cpu/onednn_softmax.h, third_party/xla/xla/tests/BUILD, third_party/xla/xla/tests/onednn_softmax_test.cc",sachinmuradi,False
+"Extract utility classes from TraceMeRecorder.
+When improving Nvidia GPU profiling overhead, we found PerThread and EventQueue are common between TraceMe and the Gpu Tracer. So extract these two and move them into profiler/utils.
+
+PiperOrigin-RevId: 640243277",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 19:20:06,"third_party/xla/third_party/tsl/tsl/profiler/backends/cpu/BUILD, third_party/xla/third_party/tsl/tsl/profiler/backends/cpu/traceme_recorder.cc, third_party/xla/third_party/tsl/tsl/profiler/backends/cpu/traceme_recorder.h, third_party/xla/third_party/tsl/tsl/profiler/lib/BUILD, third_party/xla/third_party/tsl/tsl/profiler/lib/traceme.h, third_party/xla/third_party/tsl/tsl/profiler/utils/BUILD, third_party/xla/third_party/tsl/tsl/profiler/utils/lock_free_queue.h, third_party/xla/third_party/tsl/tsl/profiler/utils/lock_free_queue_test.cc, third_party/xla/third_party/tsl/tsl/profiler/utils/no_init.h, third_party/xla/third_party/tsl/tsl/profiler/utils/per_thread.h, third_party/xla/third_party/tsl/tsl/profiler/utils/per_thread_test.cc",tensorflower-gardener,False
+"Move StreamExecutor declaration into stream_executor.h, and restructure stream_executor BUILD file to have smaller, focused cc_library targets.
+
+PiperOrigin-RevId: 640240672",Kyle Lucke,klucke@google.com,2024-06-04 19:12:30,"tensorflow/c/experimental/stream_executor/BUILD, tensorflow/c/experimental/stream_executor/stream_executor.cc, tensorflow/c/experimental/stream_executor/stream_executor_internal.h, third_party/xla/xla/BUILD, third_party/xla/xla/backends/interpreter/BUILD, third_party/xla/xla/backends/interpreter/executor.h, third_party/xla/xla/device_util.h, third_party/xla/xla/pjrt/c/BUILD, third_party/xla/xla/pjrt/c/pjrt_c_api_gpu_internal.cc, third_party/xla/xla/service/BUILD, third_party/xla/xla/service/backend.cc, third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/amdgpu_compiler.cc, third_party/xla/xla/service/gpu/amdgpu_compiler.h, third_party/xla/xla/service/gpu/autotuner_util_test.cc, third_party/xla/xla/service/gpu/cudnn_fusion_compiler.cc, third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/cudnn_test.cc, third_party/xla/xla/service/gpu/gemm_algorithm_picker_test.cc, third_party/xla/xla/service/gpu/nvptx_compiler.h, third_party/xla/xla/service/gpu/runtime/BUILD, third_party/xla/xla/service/gpu/runtime/nccl_p2p_thunk_common.h, third_party/xla/xla/service/gpu/xla_executor_state.h, third_party/xla/xla/service/shaped_buffer_test.cc, third_party/xla/xla/stream_executor/BUILD, third_party/xla/xla/stream_executor/cuda/BUILD, third_party/xla/xla/stream_executor/cuda/cuda_dnn.cc, third_party/xla/xla/stream_executor/cuda/cuda_executor.cc, third_party/xla/xla/stream_executor/cuda/cuda_fft.cc, third_party/xla/xla/stream_executor/device_memory_handle.cc, third_party/xla/xla/stream_executor/device_memory_handle.h, third_party/xla/xla/stream_executor/gpu/BUILD, third_party/xla/xla/stream_executor/gpu/gpu_command_buffer.h, third_party/xla/xla/stream_executor/gpu/gpu_executor.h, third_party/xla/xla/stream_executor/gpu/redzone_allocator_kernel_cuda.cc, third_party/xla/xla/stream_executor/gpu/redzone_allocator_kernel_rocm.cu.cc, third_party/xla/xla/stream_executor/host/BUILD, third_party/xla/xla/stream_executor/host/host_executor.cc, third_party/xla/xla/stream_executor/host/host_executor.h, third_party/xla/xla/stream_executor/host/host_platform.cc, third_party/xla/xla/stream_executor/host/host_stream.cc, third_party/xla/xla/stream_executor/host_memory_allocation.cc, third_party/xla/xla/stream_executor/kernel_factory.h, third_party/xla/xla/stream_executor/lazy_op_runner.h, third_party/xla/xla/stream_executor/mock_stream_executor.h, third_party/xla/xla/stream_executor/rocm/BUILD, third_party/xla/xla/stream_executor/rocm/rocm_blas.h, third_party/xla/xla/stream_executor/rocm/rocm_executor.cc, third_party/xla/xla/stream_executor/rocm/rocm_fft.cc, third_party/xla/xla/stream_executor/rocm/rocm_platform.h, third_party/xla/xla/stream_executor/scoped_module_handle.h, third_party/xla/xla/stream_executor/stream.h, third_party/xla/xla/stream_executor/stream_common.cc, third_party/xla/xla/stream_executor/stream_common.h, third_party/xla/xla/stream_executor/stream_executor.h, third_party/xla/xla/stream_executor/stream_executor_common.cc, third_party/xla/xla/stream_executor/stream_executor_common.h, third_party/xla/xla/stream_executor/stream_executor_interface.h, third_party/xla/xla/stream_executor/stream_executor_memory_allocator.cc, third_party/xla/xla/stream_executor/stream_executor_memory_allocator.h, third_party/xla/xla/stream_executor/tpu/BUILD, third_party/xla/xla/stream_executor/tpu/tpu_executor.cc, third_party/xla/xla/stream_executor/tpu/tpu_executor.h, third_party/xla/xla/stream_executor/tpu/tpu_executor_interface.h, third_party/xla/xla/stream_executor/tpu/tpu_node_context.cc, third_party/xla/xla/stream_executor/tpu/tpu_node_context.h, third_party/xla/xla/stream_executor/tpu/tpu_platform.h, third_party/xla/xla/stream_executor/tpu/tpu_stream.h, third_party/xla/xla/stream_executor/tpu/tpu_stream_interface.h, third_party/xla/xla/stream_executor/trace_command_buffer_factory.cc, third_party/xla/xla/stream_executor/trace_command_buffer_factory.h, third_party/xla/xla/stream_executor/typed_kernel_factory.h",klucke,False
+"Legalize shape.shape_of on 0-ranked tensor
+
+PiperOrigin-RevId: 640221427",Sandeep Dasgupta,sdasgup@google.com,2024-06-04 18:21:59,"third_party/xla/xla/mlir_hlo/mhlo/transforms/shape_legalize_to_hlo/shape_legalize_to_hlo.cc, third_party/xla/xla/mlir_hlo/tests/Dialect/mhlo/shape_legalize_to_hlo.mlir",sdasgup3,False
+"Reverts dbf3cd351cdac416d635a9725746f4bcd96ffd83
+
+PiperOrigin-RevId: 640217696",Michael Schaarschmidt,mschaarschmidt@google.com,2024-06-04 18:12:24,"tensorflow/core/common_runtime/eager/BUILD, tensorflow/core/common_runtime/eager/context_distributed_manager.cc, tensorflow/core/tfrt/saved_model/saved_model_aot_compile.cc, third_party/xla/xla/pjrt/c/BUILD, third_party/xla/xla/pjrt/c/pjrt_c_api_gpu_internal.cc, third_party/xla/xla/pjrt/distributed/topology_util.cc, third_party/xla/xla/pjrt/gpu/BUILD, third_party/xla/xla/pjrt/gpu/gpu_topology.cc, third_party/xla/xla/pjrt/gpu/gpu_topology.h, third_party/xla/xla/pjrt/gpu/se_gpu_pjrt_client.cc, third_party/xla/xla/pjrt/gpu/se_gpu_pjrt_client.h, third_party/xla/xla/pjrt/gpu/se_gpu_pjrt_compiler_test.cc",,False
+"Add a SetProto in addition to ToProto on {Shape,Tile,SplitConfig,Layout}.
+
+This saves a copy when the output is nested in a proto on an arena.
+
+PiperOrigin-RevId: 640212152",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 17:58:34,"third_party/xla/xla/layout.cc, third_party/xla/xla/layout.h, third_party/xla/xla/shape.cc, third_party/xla/xla/shape.h",tensorflower-gardener,False
+"Generate Fill op for ICI weight distribution optimization by task on host
+
+PiperOrigin-RevId: 640199516",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 17:26:38,"tensorflow/compiler/mlir/tensorflow/tests/xla_broadcast.mlir, tensorflow/compiler/mlir/tf2xla/internal/passes/BUILD, tensorflow/compiler/mlir/tf2xla/internal/passes/xla_broadcast.cc",tensorflower-gardener,False
+"[XLA] [NFC] Simplify FunctionalHloRunner interface
+
+The FunctionalHloRunner API claims to support multiple modules, but they are
+actually ignored and only one is used, plus all the callers only ever pass one
+module.
+
+PiperOrigin-RevId: 640193164",George Karpenkov,cheshire@google.com,2024-06-04 17:09:13,"third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.cc, third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.h, third_party/xla/xla/tools/multihost_hlo_runner/hlo_runner_main.cc",cheshire,False
+"[XLA:GPU][MLIR-based emitters] Remove Tiling from mlir_reduction.
+
+PiperOrigin-RevId: 640179108",Alexander Belyaev,pifon@google.com,2024-06-04 16:27:39,"third_party/xla/xla/service/gpu/fusions/reduction_mlir.cc, third_party/xla/xla/service/gpu/fusions/reduction_mlir.h, third_party/xla/xla/service/gpu/model/indexing_analysis.cc, third_party/xla/xla/service/gpu/model/indexing_analysis.h",pifon2a,False
+"PR #13289: [XLA:CPU] [oneDNN] Fix accuracy issue with layernorm fusion
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13289
+
+This PR fixes the accuracy issue seen with F16 ViT model by adding a default value for epsilon. It also adds a slight variation seen for TF layernorm pattern in XLA for F32,BF16,F16.
+
+Copybara import of the project:
+
+--
+f7adf21334c812be1052fc966339aa6308910e81 by Kanvi Khanna <kanvi.khanna@intel.com>:
+
+Update TF layernorm pattern for f16
+Add default value for epsilon which fixes accuracy
+Add tests
+
+Merging this change closes #13289
+
+PiperOrigin-RevId: 640164764",Kanvi Khanna,kanvi.khanna@intel.com,2024-06-04 15:36:20,"third_party/xla/xla/service/cpu/onednn_ops_rewriter.cc, third_party/xla/xla/tests/onednn_layer_norm_test.cc",kanvi-nervana,False
+"PR #12964: [XLA:CPU][oneDNN] Block elementwise linear fusion for non-scalar multipliers
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/12964
+
+This PR addresses a potential bug by prohibiting Elementwise Linear operation for non-scalar multipliers. Additionally, the PR includes a test to ensure that the rewrite does not occur in such scenarios.
+Copybara import of the project:
+
+--
+07d335c90fb348d8aaced74d9d007e9254b01f00 by Akhil Goel <akhil.goel@intel.com>:
+
+Block elementwise linear fusion for non-scalar multipliers
+
+Merging this change closes #12964
+
+PiperOrigin-RevId: 640164611",akhilgoe,114951738+akhilgoe@users.noreply.github.com,2024-06-04 15:35:48,"third_party/xla/xla/service/cpu/onednn_matmul_rewriter.cc, third_party/xla/xla/tests/onednn_matmul_test.cc",akhilgoe,False
+"[Triton] DotOperandEncodingAttr verifier expects kwidth to be unset (defaulted to 0) when the parent is Blocked layout. Parent uses Blocked layout when Tensor Cores are disabled. This change fixes a constructor that doesn't respect this constraint.
+
+PiperOrigin-RevId: 640161351",Mohammed Anany,manany@google.com,2024-06-04 15:24:24,"third_party/triton/temporary/series.bzl, third_party/triton/temporary/tc_disabled_kwidth_fix.patch, third_party/xla/third_party/triton/temporary/series.bzl, third_party/xla/third_party/triton/temporary/tc_disabled_kwidth_fix.patch, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc",Moerafaat,False
+"Slightly modernized the annotation in xla_client.pyi
+
+PiperOrigin-RevId: 640153521",Sergei Lebedev,slebedev@google.com,2024-06-04 14:56:56,"third_party/xla/xla/python/xla_client.py, third_party/xla/xla/python/xla_client.pyi, third_party/xla/xla/python/xla_extension/__init__.pyi",superbobry,False
+"[XLA:GPU] Load all dialects required for Triton IR generation in one place.
+
+PiperOrigin-RevId: 640149041",Oleg Shyshkov,shyshkov@google.com,2024-06-04 14:37:25,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.h, third_party/xla/xla/service/gpu/ir_emitter_triton_mem_utils_test.cc, third_party/xla/xla/service/gpu/ir_emitter_unnested.cc",olegshyshkov,False
+"Add lowerings for vector transfers.
+
+Only in-bounds, maskless, 1d transfers are supported. We'll
+probably need masks eventually, but not yet.
+
+PiperOrigin-RevId: 640148822",Johannes Reifferscheid,jreiffers@google.com,2024-06-04 14:36:24,"third_party/xla/xla/service/gpu/fusions/mlir/BUILD, third_party/xla/xla/service/gpu/fusions/mlir/lower_tensors.cc, third_party/xla/xla/service/gpu/fusions/mlir/tests/BUILD, third_party/xla/xla/service/gpu/fusions/mlir/tests/lower_tensors.mlir, third_party/xla/xla/service/gpu/fusions/mlir/tests/mlir_fusions_opt.cc",jreiffers,False
+"[XLA:GPU] Increase `shard_count` for `gpu_cub_sort_test`.
+
+PiperOrigin-RevId: 640139161",Benjamin Chetioui,bchetioui@google.com,2024-06-04 13:57:52,third_party/xla/xla/service/gpu/tests/BUILD,bchetioui,False
+"PR #13265: [GPU][NFC] Outline multihost HLO runner creation logic to enable better tests.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13265
+
+Copybara import of the project:
+
+--
+d687c6f117ba11d98653288fb0c1cb8cebd61ed6 by Ilia Sergachev <isergachev@nvidia.com>:
+
+Give GPU compiler class access to PJRT key-value store.
+
+--
+04cb8447c90d46f171e5a0f0261e81f8690d1ab4 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU][NFC] Outline multihost HLO runner creation logic to enable better tests.
+
+Merging this change closes #13265
+
+PiperOrigin-RevId: 640126763",Ilia Sergachev,isergachev@nvidia.com,2024-06-04 13:03:58,"third_party/xla/xla/tools/multihost_hlo_runner/BUILD, third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.cc, third_party/xla/xla/tools/multihost_hlo_runner/functional_hlo_runner.h, third_party/xla/xla/tools/multihost_hlo_runner/hlo_runner_main.cc",sergachev,False
+"Go: Update generated wrapper functions for TensorFlow ops.
+
+PiperOrigin-RevId: 640122383",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 12:46:17,tensorflow/go/op/wrappers.go,tensorflower-gardener,False
+"Update ops-related pbtxt files.
+
+PiperOrigin-RevId: 640116562",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 12:18:15,"tensorflow/core/ops/compat/ops_history_v2/ScatterNd.pbtxt, tensorflow/core/ops/ops.pbtxt",tensorflower-gardener,False
+"Add ""bad_indcies_policy"" to ScatterNd
+
+PiperOrigin-RevId: 640114041",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 12:06:23,"tensorflow/compiler/mlir/lite/transforms/legalize_patterns.td, tensorflow/compiler/mlir/tensorflow/ir/tf_generated_ops.td, tensorflow/compiler/mlir/tensorflow/transforms/lower_tf.td, tensorflow/core/api_def/base_api/api_def_ScatterNd.pbtxt, tensorflow/core/ops/array_ops.cc, tensorflow/tools/api/golden/v1/tensorflow.manip.pbtxt, tensorflow/tools/api/golden/v1/tensorflow.pbtxt, tensorflow/tools/api/golden/v1/tensorflow.raw_ops.pbtxt, tensorflow/tools/api/golden/v2/tensorflow.pbtxt, tensorflow/tools/api/golden/v2/tensorflow.raw_ops.pbtxt",tensorflower-gardener,False
+"Use mlir_converter::ApplyIndexing in loop_mlir.
+
+Currently, we still generate multi-result apply_indexing ops there.
+We need to ban this.
+
+PiperOrigin-RevId: 640113538",Johannes Reifferscheid,jreiffers@google.com,2024-06-04 12:04:09,third_party/xla/xla/service/gpu/fusions/loop_mlir.cc,jreiffers,False
+"[XLA:GPU] Remove all_reduce_contiguous flag.
+
+PiperOrigin-RevId: 640108223",Greg Olechwierowicz,olechwierowicz@google.com,2024-06-04 11:40:04,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/xla.proto",golechwierowicz,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640105358",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 11:26:42,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/local_service.cc, third_party/xla/xla/service/local_service.h, third_party/xla/xla/service/local_service_utils.cc, third_party/xla/xla/service/local_service_utils.h, third_party/xla/xla/service/logical_buffer.cc, third_party/xla/xla/service/logical_buffer.h, third_party/xla/xla/service/logical_buffer_analysis.cc, third_party/xla/xla/service/logical_buffer_analysis.h, third_party/xla/xla/service/logistic_expander.cc, third_party/xla/xla/service/logistic_expander.h, third_party/xla/xla/service/logistic_expander_test.cc, third_party/xla/xla/service/loop_schedule_linearizer.cc, third_party/xla/xla/service/loop_schedule_linearizer.h, third_party/xla/xla/service/loop_schedule_linearizer_test.cc, third_party/xla/xla/service/map_inliner.cc, third_party/xla/xla/service/map_inliner.h, third_party/xla/xla/service/map_inliner_test.cc, third_party/xla/xla/service/mapped_ptr_container_sorter_test.cc, third_party/xla/xla/service/maybe_owning_device_memory.cc, third_party/xla/xla/service/maybe_owning_device_memory.h",tensorflower-gardener,False
+"PR #13360: [oneDNN][BugFix] Fix dtype utility function for F16 AVX2 DL extension
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13360
+
+Intel's Efficiency cores do not support AVX512 instructions. However, some of them do support lower precisions (BF16/FP16) by converting to and from FP32. Due to the lack of Byte and Word instruction set support, the current condition check always returns False, even on supporting E-cores. This PR fixes the condition to correctly return True on all compatible hardware.
+Copybara import of the project:
+
+--
+d138f97cb5004b199e626d4f705e50269b79e160 by Akhil Goel <akhil.goel@intel.com>:
+
+Fix AVX2 FP16
+
+Merging this change closes #13360
+
+PiperOrigin-RevId: 640097657",akhilgoe,114951738+akhilgoe@users.noreply.github.com,2024-06-04 10:50:03,third_party/xla/xla/service/cpu/onednn_util.h,akhilgoe,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640096375",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 10:44:18,"tensorflow/lite/tools/strip_buffers/BUILD, tensorflow/lite/tools/strip_buffers/reconstitute_buffers_into_fb.cc, tensorflow/lite/tools/strip_buffers/strip_buffers_from_fb.cc, tensorflow/lite/tools/strip_buffers/stripping_lib.cc, tensorflow/lite/tools/strip_buffers/stripping_lib.h",tensorflower-gardener,False
+"PR #13301: [Bug-fix][XLA:CPU][oneDNN] Fix BINARY_ADD fusion to Dot
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13301
+
+This PR fixes a bug reported for JAX (https://github.com/openxla/xla/issues/13054)
+Copybara import of the project:
+
+--
+47d5bde8eab607d0fe9b60c6fd82d95365c8169f by mdfaijul <md.faijul.amin@intel.com>:
+
+Make addend rank same to dot.
+
+Merging this change closes #13301
+
+PiperOrigin-RevId: 640094871",Faijul Amin,md.faijul.amin@intel.com,2024-06-04 10:36:12,"third_party/xla/xla/service/cpu/onednn_matmul.cc, third_party/xla/xla/tests/onednn_matmul_test.cc",mdfaijul,False
+"[XLA:GPU][MLIR-based emitters] Merge MlirReductionInfo into MlirReductionFusion.
+
+Next CL will remove Tiling.
+
+PiperOrigin-RevId: 640089393",Alexander Belyaev,pifon@google.com,2024-06-04 10:12:03,"third_party/xla/xla/service/gpu/fusions/reduction_mlir.cc, third_party/xla/xla/service/gpu/fusions/reduction_mlir.h, third_party/xla/xla/service/gpu/fusions/reduction_mlir_test.cc, third_party/xla/xla/service/gpu/fusions/tiling_util.h",pifon2a,False
+"PR #13109: Add flag for termination on nccl error
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13109
+
+This introduces a flag for termination on NCCL async error. With the flag on, XLA will terminate the process on NCCL error. With the flag off, the existing behavior should remain unchanged.
+
+The patch is motivated by several problems:
+
+- Without this patch, the heartbeat monitor only checks communicators that are currently not use by the running executable (because it obtains the communicators with TryAcquire). Since NCCL errors cause a hang in the running communicator, most failing communicators are locked, so their async errors just go undetected. As a result, XLA often hangs until Grpc timeout even in cases when ncclCommGetAsyncError would report an error.
+
+- Ideally we would recover by aborting the faulty communicators, but that seems to be unreliable (aborts can cause hangs if NCCL currently hangs on a different communicator than the one being aborted). NCCL team is aware of this and working on a fix (https://github.com/NVIDIA/nccl/issues/1013). At the moment, there does not seem to be a reliable fast recovery mechanism short of process termination.
+
+We propose to expose a flag for terminating the process on failure so that there is some way to detect and recover from a NCCL failure. Once the comm-abort works reliably, we will use that and propagate the error to the API user.
+
+The patch is based on a PoC from pshamis@nvidia.com and vincentz@nvidia.com.
+Copybara import of the project:
+
+--
+858aeacb2d689e4b03f4e3bcc0595223119143d5 by Jaroslav Sevcik <jsevcik@nvidia.com>:
+
+Add flag for termination on nccl error
+
+Merging this change closes #13109
+
+PiperOrigin-RevId: 640085317",Jaroslav Sevcik,jsevcik@nvidia.com,2024-06-04 09:54:04,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/service/gpu/runtime/nccl_clique.cc, third_party/xla/xla/service/gpu/runtime/nccl_clique.h, third_party/xla/xla/xla.proto",jaro-sevcik,False
+"[XLA:GPU] Use `MatchReduceScatter` primitive in all-reduce-splitter pass.
+
+PiperOrigin-RevId: 640085099",Greg Olechwierowicz,olechwierowicz@google.com,2024-06-04 09:53:08,"third_party/xla/xla/service/BUILD, third_party/xla/xla/service/all_reduce_splitter.cc, third_party/xla/xla/service/all_reduce_splitter_test.cc",golechwierowicz,False
+"PR #12952: [ROCM] hipblas-lt: bias pointer workaround
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/12952
+
+This is a workaround for ROCM-6.2 version where the behaviour of bias pointer was changed. New version shall work fine both for old and new rocm versions
+
+@xla-rotation: could you have a look please ?
+Copybara import of the project:
+
+--
+1bd40dfa043978873652b38532e6a7c073fa2468 by Pavel Emeliyanenko <pavel.emeliyanenko@amd.com>:
+
+added bias pointer workaround
+
+--
+d351a84a3cfc61fa3672a12cda9df3265780a7d4 by Pavel Emeliyanenko <pavel.emeliyanenko@amd.com>:
+
+added comment
+
+--
+cb07babd3702c1311657f6dc6e3146dd75748448 by Pavel Emeliyanenko <pavel.emeliyanenko@amd.com>:
+
+fixing linter errors
+
+Merging this change closes #12952
+
+PiperOrigin-RevId: 640077974",pemeliya,141146080+pemeliya@users.noreply.github.com,2024-06-04 09:23:04,"third_party/xla/xla/service/gpu/tests/gemm_rewrite_test.cc, third_party/xla/xla/stream_executor/rocm/hip_blas_lt.cc, third_party/xla/xla/stream_executor/rocm/hip_blas_lt.h",pemeliya,False
+"[XLA:GPU] Fix an OOB access bug in `HloFusionAdaptor::GetParameters()`.
+
+When considering a `SingleInstructionFusion` that is also a parameter
+instruction, the parameter number enclosed within that instruction refers
+to the parent computation.
+
+As a result, we shouldn't try to access its operands, but simply enqueue the
+instruction itself as a parameter to skip.
+
+PiperOrigin-RevId: 640075542",Benjamin Chetioui,bchetioui@google.com,2024-06-04 09:13:59,third_party/xla/xla/service/gpu/hlo_traversal.cc,bchetioui,False
+"Update GraphDef version to 1883.
+
+PiperOrigin-RevId: 640073004",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 09:03:50,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-04
+
+PiperOrigin-RevId: 640072563",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 09:02:14,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"PR #13058: Use `BufferF32` instead of `Buffer` in GPU FFI example
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13058
+
+Copybara import of the project:
+
+--
+5db8e9ecb4becd69cab0381c5142058697afadb5 by Andrey Portnoy <aportnoy@nvidia.com>:
+
+Use `BufferF32` instead of `Buffer` in GPU FFI example
+
+Merging this change closes #13058
+
+PiperOrigin-RevId: 640072298",Andrey Portnoy,aportnoy@nvidia.com,2024-06-04 09:01:28,third_party/xla/docs/custom_call.md,andportnoy,False
+"[XLA:GPU] Disable broken tests in `cudnn_norm_rewriter_test.cc`.
+
+Running these tests seems to cause OOB shape accesses.
+
+Filed https://github.com/openxla/xla/issues/13361 to track work on re-enabling
+them.
+
+PiperOrigin-RevId: 640069061",Benjamin Chetioui,bchetioui@google.com,2024-06-04 08:48:52,third_party/xla/xla/service/gpu/cudnn_norm_rewriter_test.cc,bchetioui,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640067715",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 08:43:17,"third_party/xla/xla/service/gpu/llvm_gpu_backend/BUILD, third_party/xla/xla/service/gpu/llvm_gpu_backend/gpu_backend_lib.cc, third_party/xla/xla/service/gpu/llvm_gpu_backend/utils_test.cc",tensorflower-gardener,False
+"Add deadline for server shutdown to forcefully cancel pending RPCs.
+
+PiperOrigin-RevId: 640059834",Timothy Man,timothyman@google.com,2024-06-04 08:11:16,third_party/xla/xla/pjrt/distributed/service.cc,,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640057919",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 08:03:14,"tensorflow/core/framework/tensor.cc, tensorflow/core/framework/tensor_shape.cc, tensorflow/core/framework/tensor_shape.h, tensorflow/core/framework/tensor_shape_test.cc",tensorflower-gardener,False
+"Filter out tests with tag requires-gpu-amd and requires-gpu-nvidia.
+
+We should not try to run them on MacOS CPU.
+
+PiperOrigin-RevId: 640054242",Adrian Kuegel,akuegel@google.com,2024-06-04 07:47:56,third_party/xla/.kokoro/macos/build.sh,akuegel,False
+"fix the missing dependency on `bad_indices_policy`
+
+PiperOrigin-RevId: 640052536",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 07:39:31,tensorflow/core/kernels/BUILD,tensorflower-gardener,False
+"Reverts changelist 637857834
+
+PiperOrigin-RevId: 640052195",Rahul Garg,rahgarg@google.com,2024-06-04 07:38:02,"third_party/xla/xla/service/gpu/model/BUILD, third_party/xla/xla/service/gpu/model/coalescing_analysis.cc, third_party/xla/xla/service/gpu/model/coalescing_analysis.h, third_party/xla/xla/service/gpu/model/coalescing_analysis_test.cc, third_party/xla/xla/service/gpu/model/gpu_indexing_performance_model.cc",codedivine,False
+"Change grappler to optimize MatMul + Add/AddV2/BiasAdd + Maximum(x,0) as FusedMatMul with Relu.
+
+PiperOrigin-RevId: 640041501",Siqiao Wu,siqiaowu@google.com,2024-06-04 06:54:49,"tensorflow/core/grappler/BUILD, tensorflow/core/grappler/op_types.cc, tensorflow/core/grappler/op_types.h, tensorflow/core/grappler/optimizers/BUILD, tensorflow/core/grappler/optimizers/constant_folding.cc, tensorflow/core/grappler/optimizers/remapper.cc, tensorflow/core/grappler/optimizers/remapper_test.cc, tensorflow/core/kernels/BUILD, tensorflow/core/kernels/fused_eigen_output_kernels.h, tensorflow/core/kernels/mkl/BUILD, tensorflow/python/grappler/cost_analyzer_test.py",SiqiaoWu1993,False
+"PR #13253: Make correct fusion decision for inplace fusion
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13253
+
+There exist bug when making fusion decision for inplace fusion. Current implementation does not consider non-elementwise ops in consumer and will lead to inplace conflict in some specific case. Detailed information can be seen in the added test.
+Copybara import of the project:
+
+--
+fdde9d42774f5185ef0f38eb4b6972316953b1dc by Zhou, Lingzhi <lingzhi.zhou@intel.com>:
+
+make correct fusion decision for inplace fusion
+
+--
+d2e7f3565c8476f77c74004c6aceb1a29eb951fc by Zhou, Lingzhi <lingzhi.zhou@intel.com>:
+
+comment
+
+Merging this change closes #13253
+
+PiperOrigin-RevId: 640040852",lingzhi98,103185827+lingzhi98@users.noreply.github.com,2024-06-04 06:51:53,"third_party/xla/xla/service/hlo_dataflow_analysis.cc, third_party/xla/xla/service/hlo_dataflow_analysis.h, third_party/xla/xla/service/instruction_fusion.cc, third_party/xla/xla/service/instruction_fusion_test.cc",lingzhi98,False
+"[xla:cpu] Add support for concatenate instructions
+
+PiperOrigin-RevId: 640039665",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 06:46:30,"third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h, third_party/xla/xla/tests/BUILD",ezhulenev,False
+"[xla:cpu] Add support for conditional thunk
+
+PiperOrigin-RevId: 640036128",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 06:29:46,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/conditional_thunk.cc, third_party/xla/xla/service/cpu/runtime/conditional_thunk.h, third_party/xla/xla/service/cpu/runtime/thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h, third_party/xla/xla/tests/BUILD",ezhulenev,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640029554",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 05:59:19,tensorflow/core/common_runtime/executor.cc,tensorflower-gardener,False
+"[xla:cpu] Add support for outfeed to thunk runtime
+
++ enabled infeed/outfeed test in jax
+
+PiperOrigin-RevId: 640026208",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 05:42:52,"third_party/xla/xla/pjrt/cpu/BUILD, third_party/xla/xla/pjrt/cpu/cpu_client.cc, third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/infeed_thunk.cc, third_party/xla/xla/service/cpu/runtime/outfeed_thunk.cc, third_party/xla/xla/service/cpu/runtime/outfeed_thunk.h, third_party/xla/xla/service/cpu/runtime/thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h",ezhulenev,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640025385",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 05:38:32,tensorflow/core/kernels/batching_util/batch_resource_base.cc,tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640019197",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 05:08:01,tensorflow/tools/benchmark/benchmark_model.cc,tensorflower-gardener,False
+"[xla:cpu] Add support for emitting kMap and kSlice and enable more tests
+
+PiperOrigin-RevId: 640018518",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 05:04:35,"third_party/xla/xla/service/cpu/ir_emitter2.cc, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/tests/BUILD",ezhulenev,False
+"Automated Code Change
+
+PiperOrigin-RevId: 640017299",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 04:59:34,"tensorflow/core/profiler/BUILD, tensorflow/core/profiler/profiler.cc",tensorflower-gardener,False
+"[xla:cpu] Emit globals for constants with thunks runtime
+
+PiperOrigin-RevId: 640013401",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 04:47:20,"third_party/xla/xla/service/cpu/cpu_compiler.cc, third_party/xla/xla/tests/BUILD",ezhulenev,False
+"Go: Update generated wrapper functions for TensorFlow ops.
+
+PiperOrigin-RevId: 640012805",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 04:45:20,tensorflow/go/op/wrappers.go,tensorflower-gardener,False
+"Implement support for ""ignore bad indices"" case for GatherNd.
+
+PiperOrigin-RevId: 640002021",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 03:56:57,"tensorflow/compiler/mlir/tensorflow/ir/tf_generated_ops.td, tensorflow/core/api_def/base_api/api_def_GatherNd.pbtxt, tensorflow/core/kernels/BUILD, tensorflow/core/kernels/gather_nd_op.cc, tensorflow/core/kernels/gather_nd_op.h, tensorflow/core/kernels/gather_nd_op_test.cc, tensorflow/core/util/BUILD",tensorflower-gardener,False
+"Update XLA's warnings.bazelrc with `--copt=-Wno-nullability-completeness`
+
+PiperOrigin-RevId: 639993108",David Dunleavy,ddunleavy@google.com,2024-06-04 03:04:02,third_party/xla/warnings.bazelrc,ddunl,False
+"Integrate LLVM at llvm/llvm-project@ae8627809076
+
+Updates LLVM usage to match
+[ae8627809076](https://github.com/llvm/llvm-project/commit/ae8627809076)
+
+PiperOrigin-RevId: 639987778",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-04 02:32:35,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl, third_party/triton/llvm_integration/cl638979121.patch, third_party/triton/llvm_integration/series.bzl, third_party/xla/third_party/triton/llvm_integration/cl638979121.patch, third_party/xla/third_party/triton/llvm_integration/series.bzl",tensorflower-gardener,False
+"[XLA] Make CollectiveTransformationReorderer more deterministic.
+
+PiperOrigin-RevId: 639977398",Seher Ellis,sacer@google.com,2024-06-04 01:30:27,third_party/xla/xla/service/collective_transformation_reorderer.cc,seherellis,False
+"[xla:cpu] Enable more tests to run with xla:cpu thunks runtime
+
+PiperOrigin-RevId: 639970901",Eugene Zhulenev,ezhulenev@google.com,2024-06-04 00:57:06,"third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/tests/BUILD",ezhulenev,False
+"Remove align_corners attribute from composite lowering patterns for resize_nearest_neighbor.
+
+The align_corners attribute is not supported by JAX and PyTorch in the nearest mode, its only needed for TFLite resize_nearest_neighbor op. The math always matches with align_corners==False in TFLite.
+
+PiperOrigin-RevId: 639955069",Vamsi Manchala,vamsimanchala@google.com,2024-06-03 23:50:29,"tensorflow/compiler/mlir/lite/stablehlo/tests/composite-lowering.mlir, tensorflow/compiler/mlir/lite/stablehlo/transforms/composite_lowering_patterns.td",vamsimanchala,False
+"[xla:cpu] Add support for Infeed thunk to xla:cpu runtime
+
+PiperOrigin-RevId: 639947943",Eugene Zhulenev,ezhulenev@google.com,2024-06-03 23:23:48,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/cpu_executable.cc, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/infeed_thunk.cc, third_party/xla/xla/service/cpu/runtime/infeed_thunk.h, third_party/xla/xla/service/cpu/runtime/rng_state_thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h",ezhulenev,False
+"[xla:cpu] Add RngGetAndUpdateStateThunk
+
+PiperOrigin-RevId: 639941698",Eugene Zhulenev,ezhulenev@google.com,2024-06-03 23:02:20,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/rng_state_thunk.cc, third_party/xla/xla/service/cpu/runtime/rng_state_thunk.h, third_party/xla/xla/service/cpu/runtime/thunk.cc, third_party/xla/xla/service/cpu/runtime/thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc, third_party/xla/xla/service/cpu/thunk_emitter.h",ezhulenev,False
+"Remove exports_files from stream_executor/BUILD.
+
+PiperOrigin-RevId: 639936168",Kyle Lucke,klucke@google.com,2024-06-03 22:43:49,"tensorflow/core/kernels/BUILD, third_party/xla/xla/stream_executor/BUILD",klucke,False
+"[XLA:GPU] Emit matrix-vector multiplication as GemmFusion
+
+Reverts b55d4f19569e850cb11f27de8f7596a7bb6046d5
+
+PiperOrigin-RevId: 639935421",Anlun Xu,anlunx@google.com,2024-06-03 22:41:02,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemm_rewriter.cc, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/nvptx_compiler.cc",anlunx,False
+"[tflite] Add composite lowering for aten.gelu
+
+PiperOrigin-RevId: 639934528",Majid Dadashi,majiddadashi@google.com,2024-06-03 22:37:55,"tensorflow/compiler/mlir/lite/stablehlo/tests/composite-lowering.mlir, tensorflow/compiler/mlir/lite/stablehlo/transforms/composite_lowering_patterns.td",majiddadashi,False
+"PR #13302: [GPU] Fix scoped timer of LLVM verifier and move it to a higher logging level.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13302
+
+Copybara import of the project:
+
+--
+d174aac56c56bc61a146aafcb0c83e16a8154d06 by Ilia Sergachev <isergachev@nvidia.com>:
+
+[GPU] Fix scoped timer of LLVM verifier and move it to a higher logging level.
+
+Merging this change closes #13302
+
+PiperOrigin-RevId: 639917516",Ilia Sergachev,isergachev@nvidia.com,2024-06-03 21:44:20,third_party/xla/xla/service/gpu/gpu_compiler.cc,sergachev,False
+"Tighten error tolerances for various functions, especially on TPUs starting with TPUv6.
+Add range checking for several function.
+
+PiperOrigin-RevId: 639914424",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 21:33:50,"third_party/xla/xla/tests/exhaustive/BUILD, third_party/xla/xla/tests/exhaustive/exhaustive_unary_test_f32_or_smaller.cc",tensorflower-gardener,False
+"Disable some long running tests that would otherwise timeout
+
+PiperOrigin-RevId: 639913780",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 21:31:49,third_party/xla/xla/tests/select_and_scatter_test.cc,tensorflower-gardener,False
+"#tf-data-service Add logic for dynamic SplitProviders.
+
+Split providers marked as ""dynamic"" are expected to have a non-deterministic output of splits upon reinitialization/recreation and no logic should rely on the determinism of their output. As such, dispatcher logic for skipping over previously seen splits will not apply to these SplitProviders.
+
+PiperOrigin-RevId: 639913636",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 21:31:22,"tensorflow/core/data/service/dispatcher_impl.cc, tensorflow/core/framework/dataset.h",tensorflower-gardener,False
+"Integrate StableHLO at openxla/stablehlo@82bfdd48
+
+PiperOrigin-RevId: 639912807",Sandeep Dasgupta,sdasgup@google.com,2024-06-03 21:29:03,"third_party/stablehlo/temporary.patch, third_party/stablehlo/workspace.bzl, third_party/xla/third_party/stablehlo/temporary.patch, third_party/xla/third_party/stablehlo/workspace.bzl",sdasgup3,False
+"Consolidate `EnterOpMetadata` logic for op metrics db population
+
+PiperOrigin-RevId: 639902488",Yin Zhang,yinzz@google.com,2024-06-03 20:57:06,"tensorflow/core/profiler/convert/xplane_to_op_metrics_db.cc, tensorflow/core/profiler/utils/op_utils.cc, tensorflow/core/profiler/utils/op_utils.h",zzzaries,False
+"[xla:gpu] Get correct slice assigned to dynamic-update-slice result
+
+PiperOrigin-RevId: 639886142",Eugene Zhulenev,ezhulenev@google.com,2024-06-03 20:06:57,"third_party/xla/xla/service/gpu/fusions/custom.cc, third_party/xla/xla/service/gpu/tests/BUILD, third_party/xla/xla/service/gpu/tests/dynamic_slice_fusion_test.cc",ezhulenev,False
+"[xla:gpu] Strength-reduce dots that are too small
+
+PiperOrigin-RevId: 639882149",Anlun Xu,anlunx@google.com,2024-06-03 19:53:55,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gpu_algebraic_simplifier.cc, third_party/xla/xla/service/gpu/gpu_algebraic_simplifier_test.cc",anlunx,False
+"Revert bytecode changes from #2259
+
+The bytecode changes are causing issues due to some StableHLO
+consumers using StableHLO directly rather than VHLO.
+
+Temporarily remove the relevant roundtrip tests as well since this
+breaks round-tripping.
+
+PiperOrigin-RevId: 639874523",Michael Levesque-Dion,mlevesquedion@google.com,2024-06-03 19:28:55,"third_party/stablehlo/temporary.patch, third_party/xla/third_party/stablehlo/temporary.patch",mlevesquedion,False
+"Support passing user-supplied data to TfLiteOperator's methods
+
+The current mechanism of having TfLiteOperator.init return a user-allocated buffer
+doesn't allow for the TfLiteOperator.init to take a user-supplied pointer. And that is something we want to support so as to allow the developer to pass  TfLiteOperatorCreate() a C struct or C++ class implementing the Init/Free/Prepare/Eval methods.
+
+PiperOrigin-RevId: 639873764",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 19:25:55,"tensorflow/lite/c/c_api_opaque_internal.cc, tensorflow/lite/c/common_internal.h, tensorflow/lite/core/async/async_subgraph.cc, tensorflow/lite/core/c/c_api_experimental_test.cc, tensorflow/lite/core/c/c_api_opaque_test.cc, tensorflow/lite/core/c/c_api_test.cc, tensorflow/lite/core/c/operator.cc, tensorflow/lite/core/c/operator.h, tensorflow/lite/core/subgraph.cc, tensorflow/lite/delegates/BUILD, tensorflow/lite/delegates/delegate_test.cc, tensorflow/lite/delegates/opaque_delegate_test.cc, tensorflow/lite/delegates/utils/simple_opaque_delegate.cc, tensorflow/lite/delegates/utils/simple_opaque_delegate_test.cc, tensorflow/lite/mutable_op_resolver_utils_test.cc",tensorflower-gardener,False
+"Implement a batched version of `Array::GetReadyFuture()`
+
+Some IFRT implementations may be able to provide a more efficient `GetReadyFuture` implementations if they can see multiple arrays at a time, e.g., IFRT Proxy. `Client::GetReadyFuture({array})` is expected to have the same semantics as `array->GetReadyFuture()`.
+
+IFRT Proxy is updated such that the changes are forward and backward compatible. If a newer IFRT Proxy client connects to an older IFRT Proxy server that does not support `Client::GetReadyFuture()`, the client falls back to `Array::GetReadyFuture()`. Also, the proto explicitly uses non-packed fields to maintain version compatibility.
+
+PiperOrigin-RevId: 639872949",Junwhan Ahn,junwhan@google.com,2024-06-03 19:22:58,"third_party/xla/xla/python/BUILD, third_party/xla/xla/python/ifrt/BUILD, third_party/xla/xla/python/ifrt/array_impl_test_lib.cc, third_party/xla/xla/python/ifrt/client.h, third_party/xla/xla/python/ifrt/mock.cc, third_party/xla/xla/python/ifrt/mock.h, third_party/xla/xla/python/ifrt_proxy/client/BUILD, third_party/xla/xla/python/ifrt_proxy/client/array.cc, third_party/xla/xla/python/ifrt_proxy/client/client.cc, third_party/xla/xla/python/ifrt_proxy/client/client.h, third_party/xla/xla/python/ifrt_proxy/client/rpc_helper.cc, third_party/xla/xla/python/ifrt_proxy/client/rpc_helper.h, third_party/xla/xla/python/ifrt_proxy/client/version.h, third_party/xla/xla/python/ifrt_proxy/common/VERSION.md, third_party/xla/xla/python/ifrt_proxy/common/ifrt_service.proto, third_party/xla/xla/python/ifrt_proxy/integration_tests/mock_array_test.cc, third_party/xla/xla/python/ifrt_proxy/server/ifrt_backend.cc, third_party/xla/xla/python/ifrt_proxy/server/ifrt_backend.h, third_party/xla/xla/python/ifrt_proxy/server/ifrt_backend_test.cc, third_party/xla/xla/python/ifrt_proxy/server/version.h, third_party/xla/xla/python/pjrt_ifrt/pjrt_client.cc, third_party/xla/xla/python/pjrt_ifrt/pjrt_client.h, third_party/xla/xla/python/py_compile_only_client.cc, third_party/xla/xla/python/util.cc, third_party/xla/xla/python/util.h",junwhanahn,False
+"Rename StreamExecutorInterface to be StreamExecutor to save on all the renaming elsewhere.
+
+A followon change will move it from stream_executor_interface.h to stream_executor.h
+
+PiperOrigin-RevId: 639870861",Kyle Lucke,klucke@google.com,2024-06-03 19:16:05,"tensorflow/c/experimental/stream_executor/stream_executor.cc, third_party/xla/xla/backends/interpreter/executor.h, third_party/xla/xla/device_util.h, third_party/xla/xla/service/backend.cc, third_party/xla/xla/service/shaped_buffer_test.cc, third_party/xla/xla/stream_executor/cuda/cuda_blas.cc, third_party/xla/xla/stream_executor/cuda/cuda_dnn.cc, third_party/xla/xla/stream_executor/cuda/cuda_executor.cc, third_party/xla/xla/stream_executor/cuda/cuda_fft.cc, third_party/xla/xla/stream_executor/cuda/cuda_kernel.h, third_party/xla/xla/stream_executor/device_memory_handle.cc, third_party/xla/xla/stream_executor/device_memory_handle.h, third_party/xla/xla/stream_executor/gpu/gpu_executor.h, third_party/xla/xla/stream_executor/gpu/gpu_kernel.h, third_party/xla/xla/stream_executor/host/host_executor.h, third_party/xla/xla/stream_executor/host_memory_allocation.cc, third_party/xla/xla/stream_executor/host_memory_allocation.h, third_party/xla/xla/stream_executor/kernel_factory.h, third_party/xla/xla/stream_executor/mock_stream_executor.h, third_party/xla/xla/stream_executor/plugin_registry.h, third_party/xla/xla/stream_executor/rocm/hip_blas_lt.cc, third_party/xla/xla/stream_executor/rocm/rocm_blas.cc, third_party/xla/xla/stream_executor/rocm/rocm_blas.h, third_party/xla/xla/stream_executor/rocm/rocm_dnn.cc, third_party/xla/xla/stream_executor/rocm/rocm_executor.cc, third_party/xla/xla/stream_executor/rocm/rocm_fft.cc, third_party/xla/xla/stream_executor/scoped_module_handle.h, third_party/xla/xla/stream_executor/stream_executor_interface.h, third_party/xla/xla/stream_executor/stream_executor_memory_allocator.cc, third_party/xla/xla/stream_executor/stream_executor_memory_allocator.h, third_party/xla/xla/stream_executor/stream_executor_pimpl.cc, third_party/xla/xla/stream_executor/stream_executor_pimpl.h, third_party/xla/xla/stream_executor/tpu/tpu_executor.h, third_party/xla/xla/stream_executor/tpu/tpu_executor_interface.h, third_party/xla/xla/stream_executor/trace_command_buffer_factory.cc, third_party/xla/xla/stream_executor/trace_command_buffer_factory.h, third_party/xla/xla/stream_executor/typed_kernel_factory.h, third_party/xla/xla/tests/buffer_donation_test.cc, third_party/xla/xla/tests/cpu_gpu_fusion_test.cc, third_party/xla/xla/tests/dot_operation_test.cc, third_party/xla/xla/tests/dynamic_ops_test.cc, third_party/xla/xla/tests/local_client_execute_test.cc, third_party/xla/xla/tests/local_client_test_base.h, third_party/xla/xla/tests/while_test.cc",klucke,False
+"[XLA:GPU] Fix hlo_fusion_analysis_test.
+
+kParameter instruction shouldn't be a part of HloFusionAnalysis. Causes msan failure.
+
+PiperOrigin-RevId: 639866442",Oleg Shyshkov,shyshkov@google.com,2024-06-03 19:02:12,third_party/xla/xla/service/gpu/hlo_fusion_analysis_test.cc,olegshyshkov,False
+"Remove key_value_set overload for byte values.
+
+PiperOrigin-RevId: 639849972",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 18:15:57,third_party/xla/xla/python/xla.cc,tensorflower-gardener,False
+"Skip using temp files/folders when save tensor and new checkpoint.
+
+PiperOrigin-RevId: 639849044",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 18:13:15,"tensorflow/core/platform/file_system_test.cc, tensorflow/core/util/tensor_slice_writer.cc, tensorflow/core/util/tensor_slice_writer.h, third_party/xla/third_party/tsl/tsl/platform/env.cc, third_party/xla/third_party/tsl/tsl/platform/env.h, third_party/xla/third_party/tsl/tsl/platform/file_system.cc, third_party/xla/third_party/tsl/tsl/platform/file_system.h, third_party/xla/third_party/tsl/tsl/platform/retrying_file_system.h",tensorflower-gardener,False
+"Modify DirectPluginOpKernelContext constructor to get more type safety
+
+Reverts a01c5c6252ae859c18ad1e489981d867a3c4b519
+
+PiperOrigin-RevId: 639844585",Samuel Agyakwa,sagyakwa@google.com,2024-06-03 18:01:19,"tensorflow/core/common_runtime/next_pluggable_device/BUILD, tensorflow/core/common_runtime/next_pluggable_device/direct_plugin_op_kernel.cc, tensorflow/core/common_runtime/next_pluggable_device/direct_plugin_op_kernel.h, tensorflow/core/common_runtime/next_pluggable_device/plugin_op_kernel_helper.h",sagyakwa,False
+"[XLA:GPU] Renaming AddressComputationThunk to DynamicSliceThunk
+
+""AddressComputation"" is confusing, it simply fuses dynamic slice (and dynamic update slice) into other thunks via buffer assignment tricks
+
+PiperOrigin-RevId: 639843382",Sara Smoot,sarasmoot@google.com,2024-06-03 17:58:07,"third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/custom.cc, third_party/xla/xla/service/gpu/runtime/BUILD, third_party/xla/xla/service/gpu/runtime/dynamic_slice_thunk.cc, third_party/xla/xla/service/gpu/runtime/dynamic_slice_thunk.h, third_party/xla/xla/service/gpu/runtime/dynamic_slice_thunk_test.cc, third_party/xla/xla/service/gpu/runtime/for_all_thunks.cc, third_party/xla/xla/service/gpu/runtime/for_all_thunks_test.cc",sgerrard,False
+"Let derived classes access helper methods in StreamCommon.
+
+PiperOrigin-RevId: 639835739",Kyle Lucke,klucke@google.com,2024-06-03 17:36:43,third_party/xla/xla/stream_executor/stream_common.h,klucke,False
+"[XLA:GPU] Clang-tidy cleanup for xla/service/gpu/cudnn_fusion_compiler.{cc,h}
+
+PiperOrigin-RevId: 639830410",Kuy Mainwaring,kuym@google.com,2024-06-03 17:22:41,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/cudnn_fusion_compiler.cc, third_party/xla/xla/service/gpu/cudnn_fusion_compiler.h",kuym,False
+"[xla:gpu] Add GemvRewriter pass
+
+Currently this is unused but will be needed to fix matrix-vector dot performance
+
+PiperOrigin-RevId: 639819532",Anlun Xu,anlunx@google.com,2024-06-03 16:53:48,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gemv_rewriter.cc, third_party/xla/xla/service/gpu/gemv_rewriter.h, third_party/xla/xla/service/gpu/gemv_rewriter_test.cc",anlunx,False
+"Update Linux official environment to use tf package from artifact registry instead of gcr.io. I've moved the image from gcr.io over to artifact registry.
+
+PiperOrigin-RevId: 639815212",Quoc Truong,quoct@google.com,2024-06-03 16:40:05,ci/official/envs/linux_arm64,quoctruong,False
+"[XLA:GPU] Re-populate `gpu_compiler_test_autotune_db.textproto` appropriately.
+
+This fixes `GpuCompilerTest.GemmFusionIsNoOpWhenGemmFusionAutotunerFallsBackToCublas`.
+We also enforce a check that all the autotuning results are pre-loaded from
+`gpu_compiler_test_autotune_db.textproto`, which will give us a better error
+message (and a deterministic failure) should such an issue come up again.
+
+We also disable the test pre-Ampere, since we did not generate autotuning results
+below sm80.
+
+PiperOrigin-RevId: 639803950",Benjamin Chetioui,bchetioui@google.com,2024-06-03 16:05:37,"third_party/xla/xla/service/gpu/gpu_compiler_test.cc, third_party/xla/xla/service/gpu/gpu_compiler_test_autotune_db.textproto",bchetioui,False
+"[xla:cpu] Add a library for running microbenchmarks written in HLO
+
+PiperOrigin-RevId: 639794550",Eugene Zhulenev,ezhulenev@google.com,2024-06-03 15:34:16,"third_party/xla/xla/service/cpu/benchmarks/BUILD, third_party/xla/xla/service/cpu/benchmarks/elementwise_benchmark_test.cc, third_party/xla/xla/service/cpu/benchmarks/hlo_benchmark_runner.cc, third_party/xla/xla/service/cpu/benchmarks/hlo_benchmark_runner.h",ezhulenev,False
+"[XLA:GPU][MLIR emitters] Split ReductionFusionBase into two classes.
+
+PiperOrigin-RevId: 639793131",Alexander Belyaev,pifon@google.com,2024-06-03 15:30:06,"third_party/xla/xla/service/gpu/fusions/BUILD, third_party/xla/xla/service/gpu/fusions/reduction.cc, third_party/xla/xla/service/gpu/fusions/reduction.h, third_party/xla/xla/service/gpu/fusions/reduction_base.cc, third_party/xla/xla/service/gpu/fusions/reduction_base.h, third_party/xla/xla/service/gpu/fusions/reduction_mlir.cc, third_party/xla/xla/service/gpu/fusions/reduction_mlir.h, third_party/xla/xla/service/gpu/fusions/reduction_mlir_test.cc, third_party/xla/xla/service/gpu/fusions/reduction_test.cc",pifon2a,False
+"[IFRT] Add an IFRT API for Topology.
+
+Also add a (currently unused) Compile() method to ifrt::Compiler that produces an ifrt::Executable given a ifrt::Topology.
+
+At the moment this is a thin wrapper around the the PJRT TopologyDescription API, and does not attempt to change that API or its semantics. The change prepares for allowing the two to diverge.
+
+Add a PJRT-IFRT implementation of ifrt::Topology that is for now a direct wrapper of PjRtTopologyDescription.
+
+PiperOrigin-RevId: 639792742",Peter Hawkins,phawkins@google.com,2024-06-03 15:29:15,"third_party/xla/xla/pjrt/BUILD, third_party/xla/xla/pjrt/pjrt_compiler.h, third_party/xla/xla/pjrt/pjrt_device_description.h, third_party/xla/xla/pjrt/pjrt_executable.h, third_party/xla/xla/python/BUILD, third_party/xla/xla/python/ifrt/BUILD, third_party/xla/xla/python/ifrt/client.h, third_party/xla/xla/python/ifrt/compiler.h, third_party/xla/xla/python/ifrt/executable.h, third_party/xla/xla/python/ifrt/mock.h, third_party/xla/xla/python/ifrt/topology.cc, third_party/xla/xla/python/ifrt/topology.h, third_party/xla/xla/python/ifrt_proxy/client/client.h, third_party/xla/xla/python/ifrt_proxy/client/compiler.cc, third_party/xla/xla/python/ifrt_proxy/client/compiler.h, third_party/xla/xla/python/pjrt_ifrt/BUILD, third_party/xla/xla/python/pjrt_ifrt/pjrt_client.cc, third_party/xla/xla/python/pjrt_ifrt/pjrt_client.h, third_party/xla/xla/python/pjrt_ifrt/pjrt_compiler.cc, third_party/xla/xla/python/pjrt_ifrt/pjrt_compiler.h, third_party/xla/xla/python/pjrt_ifrt/pjrt_executable.cc, third_party/xla/xla/python/pjrt_ifrt/pjrt_executable.h, third_party/xla/xla/python/pjrt_ifrt/pjrt_topology.cc, third_party/xla/xla/python/pjrt_ifrt/pjrt_topology.h, third_party/xla/xla/python/pjrt_ifrt/xla_compiler.h, third_party/xla/xla/python/py_compile_only_client.cc, third_party/xla/xla/python/py_compile_only_client.h, third_party/xla/xla/python/xla.cc",hawkinsp,False
+"[XLA:GPU] Disable broken `GpuCompilerTest.GemmFusionIsNoOpWhenGemmFusionAutotunerFallsBackToCublas` temporarily.
+
+PiperOrigin-RevId: 639777588",Benjamin Chetioui,bchetioui@google.com,2024-06-03 14:36:19,third_party/xla/xla/service/gpu/gpu_compiler_test.cc,bchetioui,False
+"Fix up the wheel for `auditwheel`.
+
+Follow-up to:
+https://github.com/tensorflow/tensorflow/commit/c09c4cd108bdd4e6e68364ac1ee7f45fd0f72185
+
+PiperOrigin-RevId: 639766209",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 13:56:15,tensorflow/tools/pip_package/build_pip_package.py,tensorflower-gardener,False
+"[JAX] Fail gracefully when an array with multiple shards is passed to make_array_from_single_device_arrays.
+
+Fix a crash when an exception is thrown during PyArray construction.
+
+PiperOrigin-RevId: 639760114",Peter Hawkins,phawkins@google.com,2024-06-03 13:29:24,"third_party/xla/xla/python/py_array.cc, third_party/xla/xla/python/xla_client.py",hawkinsp,False
+"[xla:ffi] Add filegroup for all FFI headers
+
+For the JAX FFI interface, it is useful to have a build filegroup containing
+the three headers that end users will typically need.
+
+PiperOrigin-RevId: 639758901",Dan Foreman-Mackey,danfm@google.com,2024-06-03 13:24:34,third_party/xla/xla/ffi/api/BUILD,dfm,False
+"Fix the path to the tensorflow dir in the Win libtensorflow script.
+
+PiperOrigin-RevId: 639753417",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 13:01:58,tensorflow/tools/ci_build/rel/windows/cpu_libtensorflow.bat,tensorflower-gardener,False
+"Simplify bitcast-convert chain.
+
+When there is a chain of bitcast-converts, only keep the last one.
+
+PiperOrigin-RevId: 639746817",Alexander Lyashuk,crem@google.com,2024-06-03 12:31:51,"third_party/xla/xla/service/algebraic_simplifier.cc, third_party/xla/xla/service/algebraic_simplifier_test.cc",mooskagh,False
+"Add `tags` parameters to the gen_gpu_hlo_compile_tests build rule.
+
+PiperOrigin-RevId: 639745067",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 12:25:53,third_party/xla/xla/service/gpu/build_defs.bzl,tensorflower-gardener,False
+"Disable ptx_compiler_test with msan.
+
+We are currently not using compilation via libNVPTX. So even if the msan
+failure is valid, it should not matter right now.
+While there, clean up ptx_compiler_test a bit.
+
+PiperOrigin-RevId: 639740897",Adrian Kuegel,akuegel@google.com,2024-06-03 12:07:52,"third_party/xla/xla/stream_executor/cuda/BUILD, third_party/xla/xla/stream_executor/cuda/ptx_compiler_test.cc",akuegel,False
+"PR #13293: [ROCm] Add gpu_plugin dependency for AMD gpus.
+
+Imported from GitHub PR https://github.com/openxla/xla/pull/13293
+
+Without this patch amdgpu_compiler dependency was not included for gpu tests and as a result most unit tests failed on amd platform
+Copybara import of the project:
+
+--
+c87773390404c8bcd1ad00f3b0bc874bc1ad1dca by Harsha HS <Harsha.HavanurShamsundara@amd.com>:
+
+[ROCm] Add gpu_plugin dependency for AMD gpus.
+
+Without this patch amdgpu_compiler dependency was not included for
+gpu tests and as a result most unit tests failed on amd platform
+
+Merging this change closes #13293
+
+PiperOrigin-RevId: 639738302",Harsha H S,hsharsha@users.noreply.github.com,2024-06-03 11:58:27,third_party/xla/xla/tests/build_defs.bzl,hsharsha,False
+"Account for trivial dimensions in TransposesMinorDimension().
+
+We don't care about whether trivial 1-sized dimensions change their position.
+
+PiperOrigin-RevId: 639718629",Adrian Kuegel,akuegel@google.com,2024-06-03 10:32:22,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gpu_fusible.cc, third_party/xla/xla/service/gpu/gpu_fusible_test.cc",akuegel,False
+"[XLA:GPU] Add all-reduce-splitter pass to collective opt pipeline.
+
+PiperOrigin-RevId: 639705320",Greg Olechwierowicz,olechwierowicz@google.com,2024-06-03 09:31:23,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/xla.proto",golechwierowicz,False
+"[XLA:GPU] Simplify error handling for GetSymbol, remove redundant logging
+
+PiperOrigin-RevId: 639701147",George Karpenkov,cheshire@google.com,2024-06-03 09:14:03,"third_party/xla/xla/stream_executor/cuda/cuda_driver.cc, third_party/xla/xla/stream_executor/cuda/cuda_executor.cc, third_party/xla/xla/stream_executor/gpu/gpu_driver.h, third_party/xla/xla/stream_executor/rocm/rocm_driver.cc, third_party/xla/xla/stream_executor/rocm/rocm_executor.cc",cheshire,False
+"Merge pull request #69033 from tensorflow:tilakrayal-patch-2
+
+PiperOrigin-RevId: 639700296",TensorFlower Gardener,gardener@tensorflow.org,2024-06-03 10:16:32,.github/bot_config.yml,tensorflower-gardener,False
+"[XLA:GPU] Remove dead code
+
+PiperOrigin-RevId: 639700227",George Karpenkov,cheshire@google.com,2024-06-03 09:10:02,"third_party/xla/xla/service/gpu/gpu_executable.cc, third_party/xla/xla/service/gpu/gpu_executable.h",cheshire,False
+"Fix a bug in AtomicFunction destructor.
+
+When RUNTIME_FUNCTION_REFS is None, the code should return instead of passing.
+
+PiperOrigin-RevId: 639698538",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 09:03:19,tensorflow/python/eager/polymorphic_function/atomic_function.py,tensorflower-gardener,False
+"Update GraphDef version to 1882.
+
+PiperOrigin-RevId: 639698068",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 09:02:07,tensorflow/core/public/version.h,tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-03
+
+PiperOrigin-RevId: 639698044",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 09:02:04,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"[XLA:GPU] Add initial support for constraints in `SymbolicTile`.
+
+This will allow us to filter out invalid tile sizes when choosing how to
+generate a tiled program.
+
+Currently, support is minimal and only adds an overly restricted divisibility
+constraint when a split reshape occurs.
+
+In cases where we know how to derive a tile but do not yet know how to derive a
+correct constraint, we annotate the symbolic tile as ""unsatisfiable"": this
+allows us to  produce a valid symbolic tile, but later allows us to avoid
+deriving tiles for it.
+
+This gives us
+
+1. better debuggability (we can check that symbolic tile derivation logic works, and know that it fails only at adding constraints), and
+2. insurance that any constructed symbolic tile can be instantiated safely or not at all, which makes attempts at codegen safe from invalid tiling choices.
+
+As per offline discussion, we choose to have these constraints outside of
+indexing maps since they will require support for more complex infrastructure
+(disjunctions, and likely explicit conjunctions as well).
+
+PiperOrigin-RevId: 639697702",Benjamin Chetioui,bchetioui@google.com,2024-06-03 09:01:09,"third_party/xla/xla/service/gpu/model/BUILD, third_party/xla/xla/service/gpu/model/symbolic_tile.cc, third_party/xla/xla/service/gpu/model/symbolic_tile.h, third_party/xla/xla/service/gpu/model/symbolic_tile_test.cc",bchetioui,False
+"[XLA:GPU] Reenable dot_algorithm_support_test in OSS
+
+Removed the ConvertGenerator usage which caused a build error in some OSS configs.
+
+(I just noticed that someone disabled this previously.)
+
+PiperOrigin-RevId: 639681426",Tamás Danyluk,tdanyluk@google.com,2024-06-03 07:47:30,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/dot_algorithm_support_test.cc",tdanyluk,False
+"Run OpenGL-based inference always on the current MP GL context/thread.
+
+PiperOrigin-RevId: 639677439",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 07:28:28,tensorflow/lite/delegates/gpu/gl_delegate.cc,tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 639668658",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 06:50:53,"tensorflow/c/experimental/ops/gen/cpp/views/BUILD, tensorflow/c/experimental/ops/gen/cpp/views/arg_type_view.cc, tensorflow/c/experimental/ops/gen/cpp/views/arg_view.cc, tensorflow/c/experimental/ops/gen/cpp/views/attr_view.cc, tensorflow/c/experimental/ops/gen/cpp/views/op_argument_view.cc, tensorflow/c/experimental/ops/gen/cpp/views/op_view.cc",tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 639662830",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 06:19:32,"tensorflow/core/kernels/dequantize_op_test.cc, tensorflow/core/kernels/nn_ops_test.cc, tensorflow/core/kernels/save_op_test.cc",tensorflower-gardener,False
+"Merge pull request #68745 from Intel-tensorflow:akhil/xla_conv_testfix
+
+PiperOrigin-RevId: 639647649",TensorFlower Gardener,gardener@tensorflow.org,2024-06-03 04:58:51,tensorflow/compiler/tests/tensor_float_32_test.py,tensorflower-gardener,False
+Update bot_config.yml,tilakrayal,81610181+tilakrayal@users.noreply.github.com,2024-06-03 04:55:57,.github/bot_config.yml,tilakrayal,True
+"Automated Code Change
+
+PiperOrigin-RevId: 639643354",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 04:24:17,"tensorflow/core/tpu/ops/BUILD, tensorflow/core/tpu/ops/sparse_core_ops.cc, tensorflow/core/tpu/ops/topk_ops.cc, tensorflow/core/tpu/ops/tpu_compile_op.cc, tensorflow/core/tpu/ops/tpu_copy_with_dynamic_shape_op.cc, tensorflow/core/tpu/ops/tpu_execute_op.cc, tensorflow/core/tpu/ops/tpu_handle_to_key_op.cc",tensorflower-gardener,False
+"Automated Code Change
+
+PiperOrigin-RevId: 639636819",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-03 03:39:05,"tensorflow/compiler/mlir/lite/experimental/tac/utils/BUILD, tensorflow/compiler/mlir/lite/experimental/tac/utils/utils.cc, tensorflow/compiler/mlir/lite/experimental/tac/utils/utils.h",tensorflower-gardener,False
