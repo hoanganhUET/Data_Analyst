@@ -1,0 +1,91 @@
+﻿Commit Message,Name,Email,Updated at,Files Changed,Contributor,All Checks Passed
+"Integrate LLVM at llvm/llvm-project@e83adfe59632
+
+Updates LLVM usage to match
+[e83adfe59632](https://github.com/llvm/llvm-project/commit/e83adfe59632)
+
+PiperOrigin-RevId: 643659260",Alina Sbirlea,asbirlea@google.com,2024-06-15 22:07:40,"third_party/llvm/generated.patch, third_party/llvm/workspace.bzl",alinas,False
+"Reverts f4a4dbfa1a3c867ea7657a239b547829feb7157e
+
+PiperOrigin-RevId: 643651074",Jiawei Xia,jiaweix@google.com,2024-06-15 20:48:34,"third_party/xla/xla/translate/mhlo_to_hlo/mlir_hlo_to_hlo.cc, third_party/xla/xla/translate/mhlo_to_hlo/tests/sharding.mlir",JW1992,False
+"Adds an optional lambda argument to the HloConstantSplitter pass. This allows
+callers of the pass fine grained control over which constants and constant
+expressions are split.
+
+PiperOrigin-RevId: 643626840",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 17:18:55,"third_party/xla/xla/hlo/transforms/BUILD, third_party/xla/xla/hlo/transforms/hlo_constant_splitter.cc, third_party/xla/xla/hlo/transforms/hlo_constant_splitter.h, third_party/xla/xla/hlo/transforms/hlo_constant_splitter_test.cc",tensorflower-gardener,False
+"Add tests for mlir_to_hlo `xla::Serialize` method. Fix bug for programs emitting CHLO.
+
+PiperOrigin-RevId: 643620347",Kevin Gleason,gleasonk@google.com,2024-06-15 16:21:04,"third_party/xla/xla/pjrt/BUILD, third_party/xla/xla/pjrt/mlir_to_hlo.cc, third_party/xla/xla/pjrt/mlir_to_hlo_test.cc",GleasonK,False
+"Stop using xla/status.h, xla:status, and xla::Status now that xla::Status is just an alias for an absl::Status
+
+PiperOrigin-RevId: 643602075",Kyle Lucke,klucke@google.com,2024-06-15 13:27:33,third_party/xla/xla/hlo/experimental/auto_sharding/BUILD,klucke,False
+"[XLA] Add shardings for implicit operands and return values of CaseOp and IfOp.
+
+PiperOrigin-RevId: 643571904",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 09:14:33,"third_party/xla/xla/translate/mhlo_to_hlo/mlir_hlo_to_hlo.cc, third_party/xla/xla/translate/mhlo_to_hlo/tests/sharding.mlir",tensorflower-gardener,False
+"compat: Update forward compatibility horizon to 2024-06-15
+
+PiperOrigin-RevId: 643570302",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 09:03:35,tensorflow/python/compat/compat.py,tensorflower-gardener,False
+"Update GraphDef version to 1894.
+
+PiperOrigin-RevId: 643570057",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 09:02:12,tensorflow/core/public/version.h,tensorflower-gardener,False
+"[xla:gpu] Move the code that add SPMD pipeline to a utility function.
+
+Also add a test for the GPU SPMD pipeline.
+
+PiperOrigin-RevId: 643567454",Bixia Zheng,bixia@google.com,2024-06-15 08:40:58,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/gpu_compiler.cc, third_party/xla/xla/service/gpu/gpu_spmd_pipeline.cc, third_party/xla/xla/service/gpu/gpu_spmd_pipeline.h, third_party/xla/xla/service/gpu/gpu_spmd_pipeline_test.cc",bixia1,False
+"Automated Code Change
+
+PiperOrigin-RevId: 643566941",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 08:36:24,"third_party/xla/third_party/tsl/tsl/framework/bfc_allocator.cc, third_party/xla/third_party/tsl/tsl/framework/cancellation.cc, third_party/xla/third_party/tsl/tsl/framework/cancellation.h, third_party/xla/third_party/tsl/tsl/framework/cancellation_test.cc, third_party/xla/third_party/tsl/tsl/framework/device_id_manager.cc, third_party/xla/third_party/tsl/tsl/framework/device_id_manager.h, third_party/xla/third_party/tsl/tsl/framework/device_id_utils.cc, third_party/xla/third_party/tsl/tsl/framework/device_id_utils.h",tensorflower-gardener,False
+"[xla:cpu] Check host kernel buffer arguments alignment
+
++ use Literal to hold constants as std::vector<T> might not have enough alignment for the data
+
+PiperOrigin-RevId: 643566467",Eugene Zhulenev,ezhulenev@google.com,2024-06-15 08:32:25,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/cpu_compiler.cc, third_party/xla/xla/service/cpu/cpu_executable.cc, third_party/xla/xla/service/cpu/cpu_executable.h, third_party/xla/xla/service/cpu/runtime/BUILD, third_party/xla/xla/service/cpu/runtime/kernel_thunk.cc, third_party/xla/xla/service/cpu/runtime/kernel_thunk.h, third_party/xla/xla/service/cpu/thunk_emitter.cc",ezhulenev,False
+"Automated Code Change
+
+PiperOrigin-RevId: 643559981",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 07:46:00,tensorflow/lite/tools/benchmark/experimental/delegate_performance/android/proto.bzl,tensorflower-gardener,False
+"[xla:cpu] Add optimizer micro-benchmark
+
+PiperOrigin-RevId: 643554679",Eugene Zhulenev,ezhulenev@google.com,2024-06-15 07:09:04,"third_party/xla/xla/service/cpu/benchmarks/BUILD, third_party/xla/xla/service/cpu/benchmarks/optimizer_benchmark_test.cc",ezhulenev,False
+"[xla:cpu] Add a flag to set preferred vector width for LLVM backend
+
+PiperOrigin-RevId: 643551861",Eugene Zhulenev,ezhulenev@google.com,2024-06-15 06:53:17,"third_party/xla/xla/debug_options_flags.cc, third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/ir_emitter2.cc, third_party/xla/xla/service/cpu/ir_emitter2_test.cc, third_party/xla/xla/xla.proto",ezhulenev,False
+"[XLA:GPU] Extend `BlockLevelParameters` and simplify API to Triton IR emitter.
+
+`BlockLevelParameters` now contains also `num_warps`, `num_stages`, and
+`num_ctas`, which are parameters shared across the new and legacy
+infrastructures. By pushing the logic to decide which Triton IR emitter to use
+deeper into the stack, it becomes possible to produce a saner signature for
+`TritonWrapper`, `Emit{Generic,MatMul,SoftMax}`, `CreateTritonModule`, and
+`CompileTritonToLLVM`.
+
+A side benefit is that the legacy infrastructure for matrix multiplications
+now always parses its tiling configuration from the `backend_config` of the
+relevant fusion instruction. This uncovered the potential for mismatches
+(and an actual mismatch in a test), where the provided `TritonGemmConfig` does
+not correspond to the `TritonGemmKey` embedded in the fusion instruction's
+backend config. It also enables us to more easily control which path a
+SoftMax fusion is expected to take---between the legacy SoftMax emitter and
+the new generic emitter.
+
+The next steps will be to
+
+1. encode the configuration for generic Triton fusions in the backend config
+   of the fusion instruction;
+2. explicitly redirect as many Triton SoftMax fusions towards the new generic
+   emitter as is possible;
+3. delete the specialized Triton SoftMax emitter in favour of the generic
+   emitter as soon as all the fusions in 2. have been successfully converted.
+
+PiperOrigin-RevId: 643551025",Benjamin Chetioui,bchetioui@google.com,2024-06-15 06:46:28,"third_party/xla/xla/service/gpu/BUILD, third_party/xla/xla/service/gpu/fusions/triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.cc, third_party/xla/xla/service/gpu/ir_emitter_triton.h, third_party/xla/xla/service/gpu/ir_emitter_triton_cuda.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_rocm.cc, third_party/xla/xla/service/gpu/ir_emitter_triton_test.cc, third_party/xla/xla/service/gpu/ir_emitter_unnested.cc, third_party/xla/xla/service/gpu/model/tiled_hlo_computation.h, third_party/xla/xla/service/gpu/triton_support_legacy_test.cc, third_party/xla/xla/service/gpu/triton_support_test.cc, third_party/xla/xla/service/gpu/triton_test_utils.cc, third_party/xla/xla/service/gpu/triton_test_utils.h",bchetioui,False
+"[xla:cpu] NFC: Remove MLIRContext from dot emitter
+
+PiperOrigin-RevId: 643545838",Eugene Zhulenev,ezhulenev@google.com,2024-06-15 06:07:39,"third_party/xla/xla/service/cpu/BUILD, third_party/xla/xla/service/cpu/dot_op_emitter.cc, third_party/xla/xla/service/cpu/dot_op_emitter.h, third_party/xla/xla/service/cpu/ir_emitter.cc",ezhulenev,False
+"Add patch ahead of LLVM integrate to fix CI
+
+when LLVM integrate lands it should be removed
+
+PiperOrigin-RevId: 643543005",David Dunleavy,ddunleavy@google.com,2024-06-15 05:45:31,"third_party/llvm/typo.patch, third_party/llvm/workspace.bzl",ddunl,False
+"Pass GpuCompatibilityFlags to CheckGpuDelegateCompatibility.
+
+PiperOrigin-RevId: 643515114",A. Unique TensorFlower,gardener@tensorflow.org,2024-06-15 02:36:36,tensorflow/lite/tools/versioning/gpu_compatibility.cc,tensorflower-gardener,False
